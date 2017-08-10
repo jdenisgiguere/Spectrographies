@@ -8,17 +8,21 @@
 <title>Spectrographie(s) v1</title>
 
 <link rel="stylesheet" href="src/bootstrap-3.3.7\dist\css\bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
-
-
-
+<link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/leaflet.extra-markers.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster-src.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js"></script>
 
@@ -36,6 +40,17 @@ html, body {
   background-color: grey;
 }
 
+input {
+
+margin-right: 10px;
+float: right;
+}
+
+.navbar .navbar-header {
+
+background-color: rgba(255, 255, 255,0.95);
+
+}
 #map{
 
  position:absolute;
@@ -44,6 +59,32 @@ html, body {
 
  z-index: 0;
   }
+
+
+#togglebtn{
+
+left:5%;
+background-color: rgba(255, 255, 255,0);
+display:inline-block;
+
+}
+
+#toggle-bar{
+background-color: white;
+float: left;
+}
+
+#typeInput{
+position: absolute;
+z-index: 100;
+/*bottom: 5%;
+left:7%;*/
+margin: 45% 0 0 25%;
+background-color: yellow !important;
+
+}
+
+
 
 #testContainer{
 	color: black;
@@ -59,6 +100,15 @@ position: absolute;}
 z-index: 20;
 }
 
+.leaflet-popup-content-wrapper,.leaflet-popup-content
+ {
+   -webkit-border-radius: 0 !important;
+   -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    background-color: rgba(255,255,255,0.8)
+    
+
+ }
 
 #myImg {
     border-radius: 5px;
@@ -173,77 +223,248 @@ z-index: 20;
 }
 
 
+
+.navbar-header {
+  float: none;
+  background-color: white;
+}
+.navbar-toggle {
+  display: inline-block;
+}
+.navbar-collapse.collapse {
+  display: none!important;
+}
+.navbar-nav {
+  float: none!important;
+}
+.navbar-nav>li {
+  float: none;
+}
+.navbar-collapse.collapse.in{
+  display:block !important;
+}
+
+
+
+
+.navbar-toggle .icon-bar {
+  display: block;
+  width: 33px;
+  height: 4px;
+  background-color: rgb(238,51,255);
+  border-radius: 1px;
+  margin-top: 33%;
+}
+
+
+
+
+
+/* Extra Large desktops and laptops */
+@media (min-width: 1600px) and (max-width: 1980px) {
+
+#togglebtn{
+  left:5%;
+  }
+
+#typeInput{
+
+position: absolute;
+z-index: 100;
+bottom: 5%;
+left:7%;
+background-color: yellow !important;
+
+  }
+
+
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) and (max-width: 1599px) {
+
+  #togglebtn{
+
+left:5%;
+
+}
+
+#typeInput{
+
+position: absolute;
+z-index: 100;
+/*bottom: 5%;
+left:7%;*/
+margin : 25% 25% 25% 25% 
+background-color: yellow !important;
+
+  }
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+#togglebtn{
+
+left:5%;
+
+}
+
+#typeInput{
+position: absolute;
+z-index: 100;
+/*bottom: 5%;
+left:7%;*/
+margin : 25% 25% 25% 25% 
+background-color: yellow !important;
+
+  }
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+
+#togglebtn{
+left:5%;
+
+}
+
+#typeInput{
+position: absolute;
+z-index: 100;
+/*bottom: 5%;
+left:7%;*/
+margin : 25% 25% 25% 25% 
+background-color: yellow !important;
+
+  }
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+
+#togglebtn{
+
+left:5%;
+
+}
+
+#typeInput{
+position: absolute;
+z-index: 100;
+/*bottom: 5%;
+left:7%;*/
+margin : 25% 25% 25% 25% 
+background-color: yellow !important;
+
+  }
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+
+
+#togglebtn{
+
+left:5%;
+
+}
+
+#typeInput{
+position: absolute;
+z-index: 100;
+/*bottom: 5%;
+left:7%;*/
+margin : 25% 25% 25% 25% 
+background-color: yellow !important;
+
+  }
+
+}
+
+
     </style>
 
 
 <body>
+<div>
 
+<!-- THE SEARCH BAR 
 
+ <div class="well display:'inline-block'" id="typeInput"> 
+    <div class="form-inline display:'inline-block'" > 
+        <input class="form-control col-md-1 display:'inline' " type='text' name="lname" placeholder="Type">
+    
+        <input class="form-control col-md-1 display:'inline'" type='text' name="lname" placeholder="Genre">
+    
+        <input class="form-control col-md-1 display:'inline'" type='text' name="lname" placeholder="Média">
+   
+        <input class="form-control col-md-1 display:'inline'" type='text' name="lname" placeholder="Participants">
+    </div>
+  </div>
+</div>
 
-
-
-
-
-
+-->
 
  <div class="container-fluid" id="map"> </div>
-	<nav class="navbar navbar-default" id="testContainer" >
-  <div class="container-fluid" id ="test">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Spectrographies</a>
+
+
+
+<nav class="navbar navbar-fixed-top">
+
+  <div class="navbar-header">
+
+  <div id=toggle-bar>
+    <button type="button" id="togglebtn" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+
+<div id='title'>
+  <h1>
+    Spectrographie(s) du territoire
+  </h1>
+<div>
+
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <div class="well">
+         <h4> Ceci est un titre</h4>
+         <h5> Ceci est un sous-titre</h5>
+         <p> Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe,Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, </p>
+
+         <h4> Ceci est un titre</h4>
+         <h5> Ceci est un sous-titre</h5>
+
+        <p> Ceci est un second paragraphe,Ceci est un second paragraphe
+        Ceci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragraphe</p>
+
+
+      </div>
+    </ul>
+
+
+    <!--USERNAME  could be used for linking to the Fulcrum Admin Page 
+
+    <div class="navbar-header navbar-right">
+      <p class="navbar-text">
+      <a href="#" class="navbar-link">Username</a>
+      </p>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-        	<input type="text" class="form-control" id="tokenfield" />
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
+    -->
 
-    </div><!-- /.navbar-collapse -->
-
-  </div><!-- /.container-fluid -->
- 
 </nav>
- 
+
 
 <div id="myModal" class="modal">
   <span class="close">&times;</span>
@@ -252,77 +473,34 @@ z-index: 20;
 </div>      
 
 
-
-
+ 
 
 
 <script>
 
+/*** Draggable ***/
+  /*{ containment: "#containment-wrapper", scroll: false }*/ 
+
+$( function() {
+    $( "#typeInput" ).draggable({ scroll: false });
+  } );
+
+
+/*** Click outside collapse ***/
+
+$(document).click(function(e) {
+    if (!$(e.target).is('a')) {
+        $('.collapse').collapse('hide');        
+    }
+});
+
+
 var map = L.map('map', {
-          zoomControl: false}).setView([45.5314, -73.6750], 11);
-
-var baseLayer1 = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
-  
-  maxZoom: 20
-
- })
- .addTo(map);
-
-var baseLayer2 = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
- maxZoom: 20
-})
+          zoomControl: false}).setView([45.5314, -73.6750], 9);
 
 
-var baseLayer3 = L.tileLayer('http://{s}.tiles.mapbox.com/v3/gvenech.m13knc8e/{z}/{x}/{y}.png', {
- maxZoom: 20
-})
+var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg').addTo(map);
 
-var Stamen_Toner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	subdomains: 'abcd',
-	minZoom: 0,
-	maxZoom: 20,
-	ext: 'png'
-});
-
-var Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	subdomains: 'abcd',
-	minZoom: 0,
-	maxZoom: 18,
-	ext: 'png'
-});
-
-var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-});
-
-
-
-var Thunderforest_TransportDark = L.tileLayer('http://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
-	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	apikey: '<your apikey>',
-	maxZoom: 22
-});
-var OpenTopoMap = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-	maxZoom: 17,
-	attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-});
-
-
-var Thunderforest_SpinalMap = L.tileLayer('http://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png?apikey={apikey}', {
-	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	apikey: '<your apikey>',
-	maxZoom: 22
-});
-
-var Stamen_TonerHybrid = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	subdomains: 'abcd',
-	minZoom: 0,
-	maxZoom: 20,
-	ext: 'png'
-});
 
 var markerCluster = L.markerClusterGroup({
 	spiderfyOnMaxZoom: true,
@@ -370,7 +548,7 @@ $.when(
 
     _filteredMarker = L.geoJSON(_marker, {
 
-	style: function (feature) {
+	/*style: function (feature) {
 		      if(feature.properties.type === 'Rebut'){
 		        return {color: 'red'};
 		      } 
@@ -387,13 +565,13 @@ $.when(
 			  else {
 		        return { color: 'grey'};
 		      }
-    },
+    },*/
 
-    pointToLayer: function(feature, latlng) {
-     return L.circleMarker(latlng,   {radius: 8, fillOpacity: 0.5, color: "white",  weight: 1,  opacity: 0.66
+   /* pointToLayer: function(feature, latlng) {
+     return L.circleMarker(latlng,   {radius: 8, fillOpacity: 0.5, color: "purple",  weight: 1,  opacity: 0.66
      }
      	)
-    },
+    },*/
 
     onEachFeature: function(feature, layer) {
      layer.bindPopup(
@@ -424,13 +602,23 @@ $.when(
 	 '<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
 	     +feature.properties.photos_url.replace('view?photos=','')+
 	     '&amp;count=horizontal"   style="width:110px; height:20px;"></iframe>')
+
+         /*** ON HOVER ***/
+         /* layer.on('mouseover', function (e) {
+                this.openPopup();
+            });
+          layer.on('mouseout', function (e) {
+                this.closePopup();
+            });*/
+
+
     },
 });  //end _filtermarker
 
 
+/*** Toggle Layers ***/
 
-
-function toggleLayer() {
+/*function toggleLayer() {
  var baseMaps = {
   'Carto Dark  ': baseLayer1,
   'Carto Light  ': baseLayer2,
@@ -449,7 +637,7 @@ function toggleLayer() {
  L.control.layers(null,baseMaps,{position:"bottomright"}).addTo(map);
 }
 toggleLayer();
-
+*/
 
 markerCluster.addLayer(_filteredMarker)
 group.addLayer(_filteredMarker)
@@ -471,7 +659,7 @@ function getColor(d) {
 ;
 }
  
-var legend = L.control({position: 'bottomleft'});
+/*var legend = L.control({position: 'bottomleft'});
 
 legend.onAdd = function (map) {
 
@@ -490,7 +678,7 @@ categories = ['Rebut','Curiosité','Objet perdu','Autre'];
 };
 
 legend.addTo(map);
-
+*/
 
 map.on('popupopen', function () {
 	  	// Get the modal
