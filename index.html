@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+
+
+
+<title>Spectrographie(s) v1</title>
+
+<link rel="stylesheet" href="src/bootstrap-3.3.7\dist\css\bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster-src.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js"></script>
+
+
+
+  
+
+<style>
+
+   
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: grey;
+}
+
+#map{
+
+ position:absolute;
+ width:100%;
+ height:100%;
+
+ z-index: 0;
+  }
+
+#testContainer{
+	color: black;
+	margin-bottom: 0;
+	opacity: 1;
+}
+
+#inputCont{z-index: 2;
+position: absolute;}
+
+
+#slider-thumbs{
+z-index: 20;
+}
+
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 18%;
+    top: 18%;
+    width: 66%; /* Full width */
+    height: 66%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 500px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+.legend {
+    line-height: 50px;
+    color: white;
+    font-size: 150%;
+    font-style: oblique;
+}
+.legend i {
+
+    width: 200px;
+    height: 10%;
+    float: left;
+    margin-right: 10px;
+    opacity: 0.5;
+
+}
+
+
+.legend .circle {
+  float: left;
+  border-radius: 50%;
+  border-width: 12px;
+  width: 20px;
+  height: 20px;
+  margin-top: 15px;
+}
+
+
+    </style>
+
+
+<body>
+
+
+
+
+
+
+
+
+
+ <div class="container-fluid" id="map"> </div>
+	<nav class="navbar navbar-default" id="testContainer" >
+  <div class="container-fluid" id ="test">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Spectrographies</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+        	<input type="text" class="form-control" id="tokenfield" />
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+
+  </div><!-- /.container-fluid -->
+ 
+</nav>
+ 
+
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>      
+
+
+
+
+
+
+<script>
+
+var map = L.map('map', {
+          zoomControl: false}).setView([45.5314, -73.6750], 11);
+
+var baseLayer1 = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+  
+  maxZoom: 20
+
+ })
+ .addTo(map);
+
+var baseLayer2 = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+ maxZoom: 20
+})
+
+
+var baseLayer3 = L.tileLayer('http://{s}.tiles.mapbox.com/v3/gvenech.m13knc8e/{z}/{x}/{y}.png', {
+ maxZoom: 20
+})
+
+var Stamen_Toner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+});
+
+var Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 18,
+	ext: 'png'
+});
+
+var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+
+
+var Thunderforest_TransportDark = L.tileLayer('http://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
+	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	apikey: '<your apikey>',
+	maxZoom: 22
+});
+var OpenTopoMap = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+
+
+var Thunderforest_SpinalMap = L.tileLayer('http://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png?apikey={apikey}', {
+	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	apikey: '<your apikey>',
+	maxZoom: 22
+});
+
+var Stamen_TonerHybrid = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+});
+
+var markerCluster = L.markerClusterGroup({
+	spiderfyOnMaxZoom: true,
+	showCoverageOnHover: false,
+	zoomToBoundsOnClick: true,
+	removeOutsideVisibleBounds: true,
+	maxClusterRadius: 50
+
+});
+var group = L.layerGroup();
+var photo_url ="https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/view?photos=03f467ac-5c96-4483-836b-4615e4ef8896"
+var thumbnailphoto = "https://fulcrumapp.s3.amazonaws.com/photos/thumb_73c7ab63-d930-40d0-8d95-3cb6f0da6bb4-71243998-1886-49ce-86e9-d1b0eb48f328.png?AWSAccessKeyId=AKIAINLD3OFR6WK7JO3Q&Signature=BrTEemOGspEKfYuTr56kQ4yvUf4%3D&Expires=1505566588" 
+
+function getSpectro() {
+$.when(
+ $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(filterStories) {
+
+	function get_random_color() {
+	  var letters = '0123456789ABCDEF'.split('');
+	  var color = '#';
+	  for (var i = 0; i < 6; i++) {
+	   color += letters[Math.round(Math.random() * 15.66)];
+	  }
+	  return color;
+	 };
+
+	 _setColor = {
+	  radius: 8,
+	  fillColor: get_random_color(),
+	  color: '#ffffff',
+	  weight: 1,
+	  opacity: 0.6,
+	  fillOpacity: 0.8
+
+ 	}
+
+    _marker = filterStories.features;
+
+
+   // _status =filterStories.features.properties.status
+
+//    console.log(_status)
+
+ //   var test = for (i = 0; i<feature.properties.status;i++){
+
+    _filteredMarker = L.geoJSON(_marker, {
+
+	style: function (feature) {
+		      if(feature.properties.type === 'Rebut'){
+		        return {color: 'red'};
+		      } 
+		     
+		      else if(feature.properties.type === 'Curiosité'){
+		        return { color: 'orange'};
+		         }
+		        else if(feature.properties.type === 'Objet perdu'){
+		        return { color: 'purple'};
+ 				}
+		        else if(feature.properties.type === 'Autre'){
+		        return { color: 'white'};
+		        }
+			  else {
+		        return { color: 'grey'};
+		      }
+    },
+
+    pointToLayer: function(feature, latlng) {
+     return L.circleMarker(latlng,   {radius: 8, fillOpacity: 0.5, color: "white",  weight: 1,  opacity: 0.66
+     }
+     	)
+    },
+
+    onEachFeature: function(feature, layer) {
+     layer.bindPopup(
+
+     	//'<img  src="'+feature.properties.photos_url.replace('view?photos=','')+'" width="100" height=auto</img>')
+
+     '<div id="test123"><a href="#" class="speciallink"><h2>'
+	     +feature.properties.titre
+	     +'</h2></a><img id="myImg" alt="'
+	     +feature.properties.description+
+	     '" src="'
+	     +feature.properties.photos_url.replace('view?photos=','')
+	     +'" width="100" height=auto ></img><h4>'
+	     +feature.properties.date
+	     +' @ '
+	     +feature.properties.time
+	     +'</h4><p>'
+	     +feature.properties.pseudo+
+     '</p><p>'
+     	 +feature.properties.genre+
+     '</p><p>'	 
+	     +feature.properties.relation_au_lieu_appartenance.substring(0,140)+
+	  ' ... </p><div>'+
+     '<iframe src="https://www.facebook.com/plugins/share_button.php?href='
+	     + feature.properties.photos_url.replace('view?photos=','')
+	     +'&layout=button&size=small&mobile_iframe=false&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>'
+	     +'  '+
+	 '<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
+	     +feature.properties.photos_url.replace('view?photos=','')+
+	     '&amp;count=horizontal"   style="width:110px; height:20px;"></iframe>')
+    },
+});  //end _filtermarker
+
+
+
+
+function toggleLayer() {
+ var baseMaps = {
+  'Carto Dark  ': baseLayer1,
+  'Carto Light  ': baseLayer2,
+  'MapBox': baseLayer3,
+  'Thunderforest_SpinalMap': Thunderforest_SpinalMap,
+  'Thunderforest_SpinalMap': Thunderforest_SpinalMap,
+  'Stamen_Toner ': Stamen_Toner,
+  'Stamen_Terrain ': Stamen_Terrain,
+  'Stamen_TonerHybrid': Stamen_TonerHybrid,
+  'OpenTopoMap':OpenTopoMap,
+  'Esri_WorldImagery':Esri_WorldImagery
+
+
+ };
+
+ L.control.layers(null,baseMaps,{position:"bottomright"}).addTo(map);
+}
+toggleLayer();
+
+
+markerCluster.addLayer(_filteredMarker)
+group.addLayer(_filteredMarker)
+map.addLayer(markerCluster)  
+map.fitBounds(_filteredMarker.getBounds())
+
+   });
+}
+
+
+getSpectro()
+
+function getColor(d) {
+    return d === "Rebut" ? 'red' :
+           d ==="Curiosité"  ? 'orange' :
+           d === "Objet perdu"  ? 'purple' :
+           d === "Autre"  ? 'white' :
+                      '#FFEDA0';
+;
+}
+ 
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+
+categories = ['Rebut','Curiosité','Objet perdu','Autre'];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < categories.length; i++) {
+         div.innerHTML +=
+       	 '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+        	(categories[i] ? categories[i] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(map);
+
+
+map.on('popupopen', function () {
+	  	// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+
+    img.onclick = function(){
+    map.closePopup();
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+};
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+    modal.style.display = "none";
+}
+
+
+$('modalImg').on('click', function() {
+        $('.modal').hide();
+      });
+
+    });
+
+ 
+
+
+
+
+
+
+  </script>  
+
+ 
+ 
+  
+</head>
+
+
+ 
+
+</body>
+</html>
