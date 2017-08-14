@@ -8,6 +8,8 @@
 <title>Spectrographie(s) v1</title>
 
 <link rel="stylesheet" href="src/bootstrap-3.3.7\dist\css\bootstrap.css">
+<link href="src/style/navbar-fixed-side.css" rel="stylesheet" />
+<link href="src/modal_sidebar.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"/>
@@ -27,12 +29,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js"></script>
 
 
-
+<style type="text/css">
   
 
-<style>
 
-   
+
+
 html, body {
   height: 100%;
   width: 100%;
@@ -40,23 +42,19 @@ html, body {
   background-color: grey;
 }
 
-input {
-
-margin-right: 10px;
-float: right;
-}
 
 .navbar .navbar-header {
 
-background-color: rgba(255, 255, 255,0.95);
+background-color: rgba(255, 255, 255,1);
 
 }
+
 #map{
 
  position:absolute;
- width:100%;
+ width:85%;
+ left: 15%;
  height:100%;
-
  z-index: 0;
   }
 
@@ -72,24 +70,16 @@ display:inline-block;
 #toggle-bar{
 background-color: white;
 float: left;
+bottom:0;
 }
 
-#typeInput{
-position: absolute;
-z-index: 100;
-/*bottom: 5%;
-left:7%;*/
-margin: 45% 0 0 25%;
-background-color: yellow !important;
-
-}
 
 
 
 #testContainer{
-	color: black;
-	margin-bottom: 0;
-	opacity: 1;
+  color: black;
+  margin-bottom: 0;
+  opacity: 1;
 }
 
 #inputCont{z-index: 2;
@@ -196,33 +186,6 @@ z-index: 20;
     }
 }
 
-.legend {
-    line-height: 50px;
-    color: white;
-    font-size: 150%;
-    font-style: oblique;
-}
-.legend i {
-
-    width: 200px;
-    height: 10%;
-    float: left;
-    margin-right: 10px;
-    opacity: 0.5;
-
-}
-
-
-.legend .circle {
-  float: left;
-  border-radius: 50%;
-  border-width: 12px;
-  width: 20px;
-  height: 20px;
-  margin-top: 15px;
-}
-
-
 
 .navbar-header {
   float: none;
@@ -259,22 +222,11 @@ z-index: 20;
 
 
 
-
 /* Extra Large desktops and laptops */
 @media (min-width: 1600px) and (max-width: 1980px) {
 
 #togglebtn{
-  left:5%;
-  }
-
-#typeInput{
-
-position: absolute;
-z-index: 100;
-bottom: 5%;
-left:7%;
-background-color: yellow !important;
-
+left:5%;
   }
 
 
@@ -283,21 +235,8 @@ background-color: yellow !important;
 /* Large desktops and laptops */
 @media (min-width: 1200px) and (max-width: 1599px) {
 
-  #togglebtn{
-
+#togglebtn{
 left:5%;
-
-}
-
-#typeInput{
-
-position: absolute;
-z-index: 100;
-/*bottom: 5%;
-left:7%;*/
-margin : 25% 25% 25% 25% 
-background-color: yellow !important;
-
   }
 
 }
@@ -306,19 +245,7 @@ background-color: yellow !important;
 @media (min-width: 992px) and (max-width: 1199px) {
 
 #togglebtn{
-
 left:5%;
-
-}
-
-#typeInput{
-position: absolute;
-z-index: 100;
-/*bottom: 5%;
-left:7%;*/
-margin : 25% 25% 25% 25% 
-background-color: yellow !important;
-
   }
 
 }
@@ -327,19 +254,10 @@ background-color: yellow !important;
 @media (min-width: 768px) and (max-width: 991px) {
 
 
+
+
 #togglebtn{
 left:5%;
-
-}
-
-#typeInput{
-position: absolute;
-z-index: 100;
-/*bottom: 5%;
-left:7%;*/
-margin : 25% 25% 25% 25% 
-background-color: yellow !important;
-
   }
 
 }
@@ -347,21 +265,8 @@ background-color: yellow !important;
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
 
-
 #togglebtn{
-
 left:5%;
-
-}
-
-#typeInput{
-position: absolute;
-z-index: 100;
-/*bottom: 5%;
-left:7%;*/
-margin : 25% 25% 25% 25% 
-background-color: yellow !important;
-
   }
 
 }
@@ -370,56 +275,145 @@ background-color: yellow !important;
 @media (max-width: 480px) {
 
 
-
 #togglebtn{
-
 left:5%;
-
-}
-
-#typeInput{
-position: absolute;
-z-index: 100;
-/*bottom: 5%;
-left:7%;*/
-margin : 25% 25% 25% 25% 
-background-color: yellow !important;
-
   }
+}
+
+
+.well{
+  margin:15px;
+}
+
+
+
+#navBarLeft{
+  margin:auto;
+  height: 100%;
+  
+  width: 15%;
+  top: 15%;
+  left: 0;
+  bottom: 0;
+}
+
+
+#audioBox{
+
+  position: absolute;
+  z-index: 10;
+  left: 20%;
+  height: 50px;
+  width: 100px;
+  bottom: 5%;
+
+
+}
+
+#photoBox{
+
+  position: absolute;
+  z-index: 10;
+  left: 30%;
+  height: 50px;
+  width: 100px;
+  bottom: 5%;
 
 }
 
 
-    </style>
 
 
-<body>
-<div>
 
-<!-- THE SEARCH BAR 
+</style>
 
- <div class="well display:'inline-block'" id="typeInput"> 
-    <div class="form-inline display:'inline-block'" > 
-        <input class="form-control col-md-1 display:'inline' " type='text' name="lname" placeholder="Type">
-    
-        <input class="form-control col-md-1 display:'inline'" type='text' name="lname" placeholder="Genre">
-    
-        <input class="form-control col-md-1 display:'inline'" type='text' name="lname" placeholder="Média">
-   
-        <input class="form-control col-md-1 display:'inline'" type='text' name="lname" placeholder="Participants">
+
+
+
+
+
+
+<div id="menu" class="container-fluid">
+
+    <div  class="col-sm-3">
+  
+      <nav class="navbar navbar-default navbar-fixed-side" id="navBarLeft">
+           
+           <!-- Header -->
+
+              <div class="navbar-header">
+                <a class="navbar-brand" href=""><h3> Navigation </h3></a>
+              </div>
+
+                <!-- Select lists -->
+     <div class="container-fluid">           
+      <div class="well">
+        <div class="form-group">
+                  <label for="single" class="control-label">Participant</label>
+                  <select id="single" class="form-control select2-single">
+                    <option></option>
+                    <optgroup label="Alaskan/Hawaiian Time Zone">
+                      <option value="AK">Alaska</option>
+                      <option value="HI" disabled="disabled">Hawaii</option>
+                   </select>
+        </div>
+      </div>
+
+      <div class="well">
+        <div class="form-group">
+                  <label for="single" class="control-label">Type</label>
+                  <select id="single" class="form-control select2-single">
+                    <option></option>
+                    <optgroup label="Alaskan/Hawaiian Time Zone">
+                      <option value="AK">Alaska</option>
+                      <option value="HI" disabled="disabled">Hawaii</option>
+                   </select>
+        </div>
+      </div>
+
+
+      <div class="well">
+        <div class="form-group">
+                  <label for="single" class="control-label">Genre</label>
+                  <select id="single" class="form-control select2-single">
+                    <option></option>
+                    <optgroup label="Alaskan/Hawaiian Time Zone">
+                      <option value="AK">Alaska</option>
+                      <option value="HI" disabled="disabled">Hawaii</option>
+                   </select>
+        </div>
+      </div>
+
+      <div class="well">
+        <div class="form-group">
+                  <label for="single" class="control-label">Média</label>
+                  <select id="single" class="form-control select2-single">
+                    <option></option>
+                    <optgroup label="Alaskan/Hawaiian Time Zone">
+                      <option value="AK">Alaska</option>
+                      <option value="HI" disabled="disabled">Hawaii</option>
+                   </select>
+        </div>
+      </div>
+     </div>  
+
+     </nav>
+
+     </div>
+
     </div>
-  </div>
-</div>
-
--->
-
- <div class="container-fluid" id="map"> </div>
 
 
 
-<nav class="navbar navbar-fixed-top">
 
-  <div class="navbar-header">
+
+<div class="col-sm-10" id="map"> </div>
+
+
+
+<nav class="navbar navbar-fixed-top" >
+
+  <div class="navbar-header" id="navBarTop">
 
   <div id=toggle-bar>
     <button type="button" id="togglebtn" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -434,6 +428,8 @@ background-color: yellow !important;
     Spectrographie(s) du territoire
   </h1>
 <div>
+
+
 
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
@@ -473,7 +469,16 @@ background-color: yellow !important;
 </div>      
 
 
- 
+         <div class=container>
+
+         <div id ="audioBox" class="well well-sm">  AUDIO </div> 
+
+      
+         
+           <div id ="photoBox" class="well well-sm">  PHOTOS </div> 
+
+         </div> 
+      
 
 
 <script>
@@ -481,9 +486,9 @@ background-color: yellow !important;
 /*** Draggable ***/
   /*{ containment: "#containment-wrapper", scroll: false }*/ 
 
-$( function() {
+/*$( function() {
     $( "#typeInput" ).draggable({ scroll: false });
-  } );
+  } );*/
 
 
 /*** Click outside collapse ***/
@@ -503,11 +508,11 @@ var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66r
 
 
 var markerCluster = L.markerClusterGroup({
-	spiderfyOnMaxZoom: true,
-	showCoverageOnHover: false,
-	zoomToBoundsOnClick: true,
-	removeOutsideVisibleBounds: true,
-	maxClusterRadius: 50
+  spiderfyOnMaxZoom: true,
+  showCoverageOnHover: false,
+  zoomToBoundsOnClick: true,
+  removeOutsideVisibleBounds: true,
+  maxClusterRadius: 50
 
 });
 var group = L.layerGroup();
@@ -518,24 +523,24 @@ function getSpectro() {
 $.when(
  $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(filterStories) {
 
-	function get_random_color() {
-	  var letters = '0123456789ABCDEF'.split('');
-	  var color = '#';
-	  for (var i = 0; i < 6; i++) {
-	   color += letters[Math.round(Math.random() * 15.66)];
-	  }
-	  return color;
-	 };
+  function get_random_color() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+     color += letters[Math.round(Math.random() * 15.66)];
+    }
+    return color;
+   };
 
-	 _setColor = {
-	  radius: 8,
-	  fillColor: get_random_color(),
-	  color: '#ffffff',
-	  weight: 1,
-	  opacity: 0.6,
-	  fillOpacity: 0.8
+   _setColor = {
+    radius: 8,
+    fillColor: get_random_color(),
+    color: '#ffffff',
+    weight: 1,
+    opacity: 0.6,
+    fillOpacity: 0.8
 
- 	}
+  }
 
     _marker = filterStories.features;
 
@@ -548,60 +553,60 @@ $.when(
 
     _filteredMarker = L.geoJSON(_marker, {
 
-	/*style: function (feature) {
-		      if(feature.properties.type === 'Rebut'){
-		        return {color: 'red'};
-		      } 
-		     
-		      else if(feature.properties.type === 'Curiosité'){
-		        return { color: 'orange'};
-		         }
-		        else if(feature.properties.type === 'Objet perdu'){
-		        return { color: 'purple'};
- 				}
-		        else if(feature.properties.type === 'Autre'){
-		        return { color: 'white'};
-		        }
-			  else {
-		        return { color: 'grey'};
-		      }
+  /*style: function (feature) {
+          if(feature.properties.type === 'Rebut'){
+            return {color: 'red'};
+          } 
+         
+          else if(feature.properties.type === 'Curiosité'){
+            return { color: 'orange'};
+             }
+            else if(feature.properties.type === 'Objet perdu'){
+            return { color: 'purple'};
+        }
+            else if(feature.properties.type === 'Autre'){
+            return { color: 'white'};
+            }
+        else {
+            return { color: 'grey'};
+          }
     },*/
 
    /* pointToLayer: function(feature, latlng) {
      return L.circleMarker(latlng,   {radius: 8, fillOpacity: 0.5, color: "purple",  weight: 1,  opacity: 0.66
      }
-     	)
+      )
     },*/
 
     onEachFeature: function(feature, layer) {
      layer.bindPopup(
 
-     	//'<img  src="'+feature.properties.photos_url.replace('view?photos=','')+'" width="100" height=auto</img>')
+      //'<img  src="'+feature.properties.photos_url.replace('view?photos=','')+'" width="100" height=auto</img>')
 
      '<div id="test123"><a href="#" class="speciallink"><h2>'
-	     +feature.properties.titre
-	     +'</h2></a><img id="myImg" alt="'
-	     +feature.properties.description+
-	     '" src="'
-	     +feature.properties.photos_url.replace('view?photos=','')
-	     +'" width="100" height=auto ></img><h4>'
-	     +feature.properties.date
-	     +' @ '
-	     +feature.properties.time
-	     +'</h4><p>'
-	     +feature.properties.pseudo+
+       +feature.properties.titre
+       +'</h2></a><img id="myImg" alt="'
+       +feature.properties.description+
+       '" src="'
+       +feature.properties.photos_url.replace('view?photos=','')
+       +'" width="100" height=auto ></img><h4>'
+       +feature.properties.date
+       +' @ '
+       +feature.properties.time
+       +'</h4><p>'
+       +feature.properties.pseudo+
      '</p><p>'
-     	 +feature.properties.genre+
-     '</p><p>'	 
-	     +feature.properties.relation_au_lieu_appartenance.substring(0,140)+
-	  ' ... </p><div>'+
+       +feature.properties.genre+
+     '</p><p>'   
+       +feature.properties.relation_au_lieu_appartenance.substring(0,140)+
+    ' ... </p><div>'+
      '<iframe src="https://www.facebook.com/plugins/share_button.php?href='
-	     + feature.properties.photos_url.replace('view?photos=','')
-	     +'&layout=button&size=small&mobile_iframe=false&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>'
-	     +'  '+
-	 '<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
-	     +feature.properties.photos_url.replace('view?photos=','')+
-	     '&amp;count=horizontal"   style="width:110px; height:20px;"></iframe>')
+       + feature.properties.photos_url.replace('view?photos=','')
+       +'&layout=button&size=small&mobile_iframe=false&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>'
+       +'  '+
+   '<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
+       +feature.properties.photos_url.replace('view?photos=','')+
+       '&amp;count=horizontal"   style="width:110px; height:20px;"></iframe>')
 
          /*** ON HOVER ***/
          /* layer.on('mouseover', function (e) {
@@ -670,8 +675,8 @@ categories = ['Rebut','Curiosité','Objet perdu','Autre'];
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < categories.length; i++) {
          div.innerHTML +=
-       	 '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
-        	(categories[i] ? categories[i] + '<br>' : '+');
+         '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+          (categories[i] ? categories[i] + '<br>' : '+');
     }
 
     return div;
@@ -681,7 +686,7 @@ legend.addTo(map);
 */
 
 map.on('popupopen', function () {
-	  	// Get the modal
+      // Get the modal
 var modal = document.getElementById('myModal');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -729,4 +734,8 @@ $('modalImg').on('click', function() {
  
 
 </body>
+</html>
+
+
+   </body>
 </html>
