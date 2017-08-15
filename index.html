@@ -18,6 +18,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
 <link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
 
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -34,7 +36,6 @@
 
 
 
-
 html, body {
   height: 100%;
   width: 100%;
@@ -42,6 +43,11 @@ html, body {
   background-color: grey;
 }
 
+
+/*h3, h4{
+
+  display: inline !important;
+}*/
 
 .navbar .navbar-header {
 
@@ -54,8 +60,9 @@ background-color: rgba(255, 255, 255,1);
  position:absolute;
  width:85%;
  left: 15%;
- height:100%;
+ height:93%;
  z-index: 0;
+ bottom: 0;
   }
 
 
@@ -114,10 +121,10 @@ z-index: 20;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */
-    left: 18%;
-    top: 18%;
-    width: 66%; /* Full width */
-    height: 66%; /* Full height */
+    left: 15%;
+    top: 15%;*/
+    width: 10%; /* Full width */
+    height: 80%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
@@ -125,20 +132,22 @@ z-index: 20;
 
 /* Modal Content (image) */
 .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 500px;
+    margin-top:1px;
+    margin-left: 50px;
+    display: inline-block;
+    width: 50%;
+    max-width: 400px;
+
 }
 
 /* Caption of Modal Image */
 #caption {
     margin: auto;
-    display: block;
+    display: inline-block;
     width: 80%;
     max-width: 700px;
-    text-align: center;
-    color: #ccc;
+    text-align: left;
+    color: black;
     padding: 10px 0;
     height: 150px;
 }
@@ -322,6 +331,11 @@ left:5%;
 }
 
 
+#img01{
+
+  max-width: 50% !important;
+}
+
 
 
 
@@ -434,17 +448,29 @@ left:5%;
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
       <div class="well">
-         <h4> Ceci est un titre</h4>
-         <h5> Ceci est un sous-titre</h5>
-         <p> Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe,Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, Ceci est un paragraphe, </p>
 
-         <h4> Ceci est un titre</h4>
-         <h5> Ceci est un sous-titre</h5>
+         <h4> À propos de Spectrographies</h4>
+        
+         <p> 
 
-        <p> Ceci est un second paragraphe,Ceci est un second paragraphe
-        Ceci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragrapheCeci est un second paragraphe</p>
+            Où suis-je ? <br>
+            Chez qui suis-je ? <br>
+            Que me propose-t-on ? <br>
+            Sous quelles conditions ? <br>
+            Qu’est-ce qui pourrait m’amener à revenir ? <br>
+            L’information est-elle à jour ? <br>
+            Puis-je contacter les propriétaires du site ? <br>
+            Suis-je arrivé à tout lire sans m’endormir ? <br> </p>
+            
 
-
+            <h4> Contact </h4>
+            <hr>
+            <p> Natacha Clitandre : <a> + 1 514-555-5555</a></p>
+            <p> Courriel : <a> abcd@gmail.com </a> </p>
+            <hr>
+            <p> Agence TOPO : <a> + 1 514-555-5555</a></p>
+            <p> Courriel : <a> abcd@gmail.com </a> </p>
+         
       </div>
     </ul>
 
@@ -466,22 +492,16 @@ left:5%;
   <span class="close">&times;</span>
   <img class="modal-content" id="img01">
   <div id="caption"></div>
+  
 </div>      
 
 
-         <div class=container>
-
-         <div id ="audioBox" class="well well-sm">  AUDIO </div> 
-
-      
-         
-           <div id ="photoBox" class="well well-sm">  PHOTOS </div> 
-
-         </div> 
-      
-
-
 <script>
+
+
+/*** Marker ***/
+
+
 
 /*** Draggable ***/
   /*{ containment: "#containment-wrapper", scroll: false }*/ 
@@ -501,10 +521,14 @@ $(document).click(function(e) {
 
 
 var map = L.map('map', {
-          zoomControl: false}).setView([45.5314, -73.6750], 9);
+          zoomControl: true}).setView([45.5314, -73.6750], 9);
+
 
 
 var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg').addTo(map);
+
+
+
 
 
 var markerCluster = L.markerClusterGroup({
@@ -544,7 +568,7 @@ $.when(
 
     _marker = filterStories.features;
 
-
+    
    // _status =filterStories.features.properties.status
 
 //    console.log(_status)
@@ -553,96 +577,59 @@ $.when(
 
     _filteredMarker = L.geoJSON(_marker, {
 
-  /*style: function (feature) {
-          if(feature.properties.type === 'Rebut'){
-            return {color: 'red'};
-          } 
-         
-          else if(feature.properties.type === 'Curiosité'){
-            return { color: 'orange'};
-             }
-            else if(feature.properties.type === 'Objet perdu'){
-            return { color: 'purple'};
-        }
-            else if(feature.properties.type === 'Autre'){
-            return { color: 'white'};
-            }
-        else {
-            return { color: 'grey'};
-          }
-    },*/
 
-   /* pointToLayer: function(feature, latlng) {
-     return L.circleMarker(latlng,   {radius: 8, fillOpacity: 0.5, color: "purple",  weight: 1,  opacity: 0.66
-     }
-      )
-    },*/
+  
+   pointToLayer: function(feature, latlng) {
+
+     var redMarker = new L.ExtraMarkers.icon({
+          icon: 'glyphicon-eye-open',
+          markerColor: 'cyan',
+          shape: 'penta',
+          prefix: 'glyphicon'
+        });
+
+        return L.marker(latlng, {icon:redMarker})
+      },
+
+   
 
     onEachFeature: function(feature, layer) {
      layer.bindPopup(
 
-      //'<img  src="'+feature.properties.photos_url.replace('view?photos=','')+'" width="100" height=auto</img>')
+      //company != null ? company : ""
+      
 
-     '<div id="test123"><a href="#" class="speciallink"><h2>'
+     '<div id="popUpOpen"><a href="#" id="titrePopUp"><h2>'
        +feature.properties.titre
-       +'</h2></a><img id="myImg" alt="'
-       +feature.properties.description+
-       '" src="'
-       +feature.properties.photos_url.replace('view?photos=','')
-       +'" width="100" height=auto ></img><h4>'
-       +feature.properties.date
-       +' @ '
-       +feature.properties.time
-       +'</h4><p>'
+       +'</h2></a><h3 style="display:inline">'
+       +feature.properties.genre
+       +' & '
+       +feature.properties.type
+       +'</h3><h4> Par : '
        +feature.properties.pseudo+
-     '</p><p>'
-       +feature.properties.genre+
-     '</p><p>'   
-       +feature.properties.relation_au_lieu_appartenance.substring(0,140)+
-    ' ... </p><div>'+
+       '</h4><div class=well><img id="myImg" alt="<div class=well><h2>'
+       +feature.properties.titre+'</h2><h4> Genre : '+feature.properties.genre+'</h4><h4> Type : '+feature.properties.type+'</h4><h4> Auteur : '+feature.properties.pseudo+'</h4><h4> Relation au lieu : '
+       +feature.properties.relation_au_lieu_appartenance
+       +'</h4><h4> Contexte : '
+       +feature.properties.description_contexte
+       +'</h4></div></div>" src="'
+       +feature.properties.photos_url.replace('view?photos=','') 
+       +'"width="auto" height="100px" style="border-radius:0"></div></img>'   
+       +/*feature.properties.relation_au_lieu_appartenance.substring(0,140)+
+    ' ... </p><div>'+*/
      '<iframe src="https://www.facebook.com/plugins/share_button.php?href='
        + feature.properties.photos_url.replace('view?photos=','')
        +'&layout=button&size=small&mobile_iframe=false&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>'
        +'  '+
-   '<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
+    '<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
        +feature.properties.photos_url.replace('view?photos=','')+
        '&amp;count=horizontal"   style="width:110px; height:20px;"></iframe>')
 
-         /*** ON HOVER ***/
-         /* layer.on('mouseover', function (e) {
-                this.openPopup();
-            });
-          layer.on('mouseout', function (e) {
-                this.closePopup();
-            });*/
-
-
-    },
+    }
 });  //end _filtermarker
 
 
-/*** Toggle Layers ***/
 
-/*function toggleLayer() {
- var baseMaps = {
-  'Carto Dark  ': baseLayer1,
-  'Carto Light  ': baseLayer2,
-  'MapBox': baseLayer3,
-  'Thunderforest_SpinalMap': Thunderforest_SpinalMap,
-  'Thunderforest_SpinalMap': Thunderforest_SpinalMap,
-  'Stamen_Toner ': Stamen_Toner,
-  'Stamen_Terrain ': Stamen_Terrain,
-  'Stamen_TonerHybrid': Stamen_TonerHybrid,
-  'OpenTopoMap':OpenTopoMap,
-  'Esri_WorldImagery':Esri_WorldImagery
-
-
- };
-
- L.control.layers(null,baseMaps,{position:"bottomright"}).addTo(map);
-}
-toggleLayer();
-*/
 
 markerCluster.addLayer(_filteredMarker)
 group.addLayer(_filteredMarker)
@@ -655,51 +642,38 @@ map.fitBounds(_filteredMarker.getBounds())
 
 getSpectro()
 
-function getColor(d) {
-    return d === "Rebut" ? 'red' :
-           d ==="Curiosité"  ? 'orange' :
-           d === "Objet perdu"  ? 'purple' :
-           d === "Autre"  ? 'white' :
-                      '#FFEDA0';
-;
-}
+
  
-/*var legend = L.control({position: 'bottomleft'});
-
-legend.onAdd = function (map) {
-
-    var div = L.DomUtil.create('div', 'info legend');
-
-categories = ['Rebut','Curiosité','Objet perdu','Autre'];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < categories.length; i++) {
-         div.innerHTML +=
-         '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
-          (categories[i] ? categories[i] + '<br>' : '+');
-    }
-
-    return div;
-};
-
-legend.addTo(map);
-*/
-
 map.on('popupopen', function () {
       // Get the modal
 var modal = document.getElementById('myModal');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
+var h2 = document.getElementById('titrePopUp');
 var img = document.getElementById('myImg');
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
+   
+
+
+    
 
     img.onclick = function(){
+
     map.closePopup();
     modal.style.display = "block";
-    modalImg.src = this.src;
+    modalImg.src = img.src;
     captionText.innerHTML = this.alt;
 };
+
+
+    h2.onclick = function(){
+
+    map.closePopup();
+    modal.style.display = "block";
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
+   }
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];

@@ -1,0 +1,18 @@
+
+  
+  MODAL 
+  
+ - Rendre la photo du modal plus grande
+ - Ajouter l'autoportrait de l'auteur dans le modal page ?
+ - Probleme avec les ponctuation de type / " ' dans les champs de textes
+ - Probleme avec les champs : Type et Genre (autre) 
+ - Ajouter audio
+
+  AUDIO
+  
+  <audio controls>
+  <source src="http://2QMTL0.akacast.akamaistream.net:80/7/953/177387/v1/rc.akacast.akamaistream.net/2QMTL0" type="audio/ogg">
+  </audio>*/
+  
+  SLIDER
+  
