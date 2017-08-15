@@ -242,21 +242,6 @@ bottom:0;
 
 
 
-
-#testContainer{
-  color: black;
-  margin-bottom: 0;
-  opacity: 1;
-}
-
-#inputCont{z-index: 2;
-position: absolute;}
-
-
-#slider-thumbs{
-z-index: 20;
-}
-
 .leaflet-popup-content-wrapper,.leaflet-popup-content
  {
    -webkit-border-radius: 0 !important;
@@ -275,33 +260,51 @@ z-index: 20;
 
 #myImg:hover {opacity: 0.7;}
 
+/***************** THE MODAL ********************/
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 15%;
-    top: 15%;*/
-    width: 10%; /* Full width */
-    height: 80%; /* Full height */
+    left: 0;
+    top: 50px !important;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    /*min-height: 100%;*/
 }
 
 /* Modal Content (image) */
+
+
+#modalContent {
+display: inline-block;
+}
+
+.modalContainer{
+margin-top: 125px !important;
+}
+
+/*
 .modal-content {
-    margin-top:1px;
+    margin-top:50px;
     margin-left: 50px;
     display: inline-block;
     width: 50%;
     max-width: 400px;
+}*/
 
+.modal-img{
+
+    display: inline-block;
+    min-width: 100%;
 }
 
 /* Caption of Modal Image */
-#caption {
+/*#caption {
     margin: auto;
     display: inline-block;
     width: 80%;
@@ -310,7 +313,7 @@ z-index: 20;
     color: black;
     padding: 10px 0;
     height: 150px;
-}
+}*/
 
 /* Add Animation */
 .modal-content, #caption {    
@@ -333,10 +336,10 @@ z-index: 20;
 /* The Close Button */
 .close {
     position: absolute;
-    top: 15px;
-    right: 35px;
+    top: 25px;
+    right: 45px;
     color: #f1f1f1;
-    font-size: 40px;
+    font-size: 100px;
     font-weight: bold;
     transition: 0.3s;
 }
@@ -348,13 +351,7 @@ z-index: 20;
     cursor: pointer;
 }
 
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-    .modal-content {
-        width: 100%;
-    }
-}
-
+/***************** END OF THE MODAL ********************/
 
 .navbar-header {
   float: none;
@@ -439,8 +436,6 @@ z-index: 20;
 
   max-width: 50% !important;
 }
-
-
 
 
 
@@ -596,10 +591,17 @@ z-index: 20;
 
 
 <div id="myModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="img01">
-  <div id="caption"></div>
-  
+  <div id="modalContent" class="container-fluid">
+    <div class="modalContainer">
+      <span class="close">&times;</span>
+    <div class="col-sm-6 col-md-7 col-lg-8 col-xl-9 align-items-center">
+        <img class="modal-img" id="img01">
+    </div>
+    <div>
+    <div id="caption" class="col-sm-6 col-md-5 col-lg-4 col-xl-3 align-items-center"></div>
+     
+    
+  </div>
 </div>      
 
 
@@ -632,7 +634,7 @@ var map = L.map('map', {
 
 
 
-var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg');
+var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg').addTo(map);
 
 
 
@@ -714,7 +716,7 @@ $.when(
        +feature.properties.type
        +'</h3><h4> Par : '
        +feature.properties.pseudo+
-       '</h4><div class=well><img id="myImg" alt="<div class=well><h2>'
+       '</h4><div><img class="img-thumbnail "id="myImg" alt="<div><h2>'
        +feature.properties.titre+'</h2><h4> Genre : '+feature.properties.genre+'</h4><h4> Type : '+feature.properties.type+'</h4><h4> Auteur : '+feature.properties.pseudo+'</h4><h4> Relation au lieu : '
        +feature.properties.relation_au_lieu_appartenance
        +'</h4><h4> Contexte : '
@@ -770,7 +772,8 @@ var captionText = document.getElementById("caption");
     map.closePopup();
     modal.style.display = "block";
     modalImg.src = img.src;
-    captionText.innerHTML = this.alt;
+    captionText.innerHTML = '<div class="well">'+this.alt+'</div>'
+
 };
 
 
@@ -779,7 +782,8 @@ var captionText = document.getElementById("caption");
     map.closePopup();
     modal.style.display = "block";
     modalImg.src = img.src;
-    captionText.innerHTML = img.alt;
+    captionText.innerHTML = '<div class="well">'+img.alt+'</div>'
+    //captionText.innerHTML = '<div class="well"><h2></h2></div>';
    }
 
 // Get the <span> element that closes the modal
