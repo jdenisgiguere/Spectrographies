@@ -17,6 +17,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
 <link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
+<!-- Magnific Popup core CSS file -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+
+
+
+
+
+
 
 
 
@@ -24,6 +32,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Magnific Popup core JS file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="js/leaflet.extra-markers.min.js"></script>
@@ -44,7 +54,7 @@ html, body {
 }
 
 
-/*h3, h4{
+/* h3{
 
   display: inline !important;
 }*/
@@ -193,16 +203,16 @@ background-color: rgba(255, 255, 255,1);
 
 #map{
 
- width: 85% !important;
+ width: 80% !important;
  height: 93% !important;
  bottom: 0 !important;
- left: 15% !important;
+ left: 20% !important;
  margin:0 !important;
   }
 
 #navBarLeft{
   height: 101% !important;;
-  width: 15% !important;
+  width: 20% !important;
   left: 0 !important;;
 
 
@@ -253,6 +263,7 @@ bottom:0;
  }
 
 #myImg {
+    margin-bottom: 15px;
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
@@ -274,18 +285,30 @@ bottom:0;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    align-items: center !important;
     /*min-height: 100%;*/
 }
 
 /* Modal Content (image) */
 
 
+
 #modalContent {
-display: inline-block;
+  margin-top: 25px!important;
+  align-items: center !important;
+  display: inline-block;
 }
 
-.modalContainer{
-margin-top: 125px !important;
+.modalContainer{ 
+/*background-color: black !important;*/
+align-items: center !important;
+margin-top: 75px !important;
+
+}
+
+#imgContainer{
+  align-items: center !important;
+  margin-top: -15px !important;
 }
 
 /*
@@ -297,23 +320,14 @@ margin-top: 125px !important;
     max-width: 400px;
 }*/
 
-.modal-img{
 
-    display: inline-block;
-    min-width: 100%;
-}
+
 
 /* Caption of Modal Image */
-/*#caption {
+#caption {
     margin: auto;
-    display: inline-block;
-    width: 80%;
-    max-width: 700px;
-    text-align: left;
-    color: black;
-    padding: 10px 0;
-    height: 150px;
-}*/
+
+}
 
 /* Add Animation */
 .modal-content, #caption {    
@@ -351,6 +365,21 @@ margin-top: 125px !important;
     cursor: pointer;
 }
 
+#selfie{
+  top: 15px;
+  right: 15px;
+  max-width: 20%;
+}
+
+
+}
+
+#img01{
+
+  max-width: 80% !important;
+}
+
+
 /***************** END OF THE MODAL ********************/
 
 .navbar-header {
@@ -385,14 +414,8 @@ margin-top: 125px !important;
   margin-top: 33%;
 }
 
-
-
-
-
-
-
-.well{
-  margin:15px;
+.formContainer{
+  margin:20px;
 }
 
 
@@ -408,34 +431,6 @@ margin-top: 125px !important;
 }
 
 
-#audioBox{
-
-  position: absolute;
-  z-index: 10;
-  left: 20%;
-  height: 50px;
-  width: 100px;
-  bottom: 5%;
-
-
-}
-
-#photoBox{
-
-  position: absolute;
-  z-index: 10;
-  left: 30%;
-  height: 50px;
-  width: 100px;
-  bottom: 5%;
-
-}
-
-
-#img01{
-
-  max-width: 50% !important;
-}
 
 
 
@@ -462,7 +457,7 @@ margin-top: 125px !important;
 
 <!-- Select lists -->
      <div class="container-fluid ">           
-      <div class="well">
+      <div  class="well formContainer">
         <div class="form-group">
                   <label for="single" class="control-label">Participant</label>
                   <select id="single" class="form-control select2-single">
@@ -474,7 +469,7 @@ margin-top: 125px !important;
         </div>
       </div>
 
-      <div class="well">
+      <div class="well formContainer">
         <div class="form-group">
                   <label for="single" class="control-label">Type</label>
                   <select id="single" class="form-control select2-single">
@@ -487,7 +482,7 @@ margin-top: 125px !important;
       </div>
 
 
-      <div class="well">
+      <div class="well formContainer">
         <div class="form-group">
                   <label for="single" class="control-label">Genre</label>
                   <select id="single" class="form-control select2-single">
@@ -499,7 +494,7 @@ margin-top: 125px !important;
         </div>
       </div>
 
-      <div class="well">
+      <div class="well formContainer">
         <div class="form-group">
                   <label for="single" class="control-label">Média</label>
                   <select id="single" class="form-control select2-single">
@@ -592,18 +587,17 @@ margin-top: 125px !important;
 
 <div id="myModal" class="modal">
   <div id="modalContent" class="container-fluid">
-    <div class="modalContainer">
-      <span class="close">&times;</span>
-    <div class="col-sm-6 col-md-7 col-lg-8 col-xl-9 align-items-center">
-        <img class="modal-img" id="img01">
-    </div>
-    <div>
-    <div id="caption" class="col-sm-6 col-md-5 col-lg-4 col-xl-3 align-items-center"></div>
-     
-    
-  </div>
-</div>      
+    <div class="row modalContainer">
+        <span class="close">&times;</span>
 
+      <div id="imgContainer" class=" col-sm-6 col-md-7 col-lg-7">
+          <img class=" img-responsive img-thumbnail" id="img01">
+      </div>
+          <div id="caption" class=" col-sm-6 col-md-5 col-lg-5"></div>
+        
+   </div>      
+  </div>
+</div>
 
 <script>
 
@@ -716,14 +710,25 @@ $.when(
        +feature.properties.type
        +'</h3><h4> Par : '
        +feature.properties.pseudo+
+
+       // Image section with alt attributes as modal text content //
+
        '</h4><div><img class="img-thumbnail "id="myImg" alt="<div><h2>'
-       +feature.properties.titre+'</h2><h4> Genre : '+feature.properties.genre+'</h4><h4> Type : '+feature.properties.type+'</h4><h4> Auteur : '+feature.properties.pseudo+'</h4><h4> Relation au lieu : '
-       +feature.properties.relation_au_lieu_appartenance
-       +'</h4><h4> Contexte : '
+       +feature.properties.titre
+       +'</h2><br><h3 style=&quot;display: inline !important;&quot;> Genre : </h3><h4 style=&quot;display: inline !important;&quot;>'
+       +feature.properties.genre+'</h4><br><br><h3 style=&quot;display: inline !important;&quot;> Type : </h3><h4 style=&quot;display: inline !important;&quot;>'
+       +feature.properties.type+'</h4><br><h3> Contexte : </h3><p>'
        +feature.properties.description_contexte
-       +'</h4></div></div>" src="'
+       +'</p><h3 style=&quot;display: inline !important;&quot;> Auteur : </h3><h4 style=&quot;display: inline !important;&quot;>'
+       +feature.properties.pseudo
+        // Autoportrait //
+       +'<div class=&quot;row&quot;><div class=&quot;well&quot; id=&quot;selfieBox&quot;><div> <img  id=&quot;selfie&quot; class=&quot;img-thumbnail&quot; src=&quot;'
+       +feature.properties.autoportrait_url.replace('view?photos=','')
+       +'&quot;</img></div><div><h3> Relation au lieu : </h3><p>'
+       +feature.properties.relation_au_lieu_appartenance
+       +'</p></div></div></div></div>" src="'
        +feature.properties.photos_url.replace('view?photos=','') 
-       +'"width="auto" height="100px" style="border-radius:0"></div></img>'   
+       +'"></div></img>'   
        +/*feature.properties.relation_au_lieu_appartenance.substring(0,140)+
     ' ... </p><div>'+*/
      '<iframe src="https://www.facebook.com/plugins/share_button.php?href='
@@ -752,17 +757,21 @@ map.fitBounds(_filteredMarker.getBounds())
 getSpectro()
 
 
+
+/**** pop up & modal sections ****/
  
 map.on('popupopen', function () {
       // Get the modal
 var modal = document.getElementById('myModal');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
+
 var h2 = document.getElementById('titrePopUp');
+
 var img = document.getElementById('myImg');
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
-   
+
 
 
     
@@ -773,6 +782,8 @@ var captionText = document.getElementById("caption");
     modal.style.display = "block";
     modalImg.src = img.src;
     captionText.innerHTML = '<div class="well">'+this.alt+'</div>'
+    
+
 
 };
 
@@ -781,8 +792,11 @@ var captionText = document.getElementById("caption");
 
     map.closePopup();
     modal.style.display = "block";
+   
     modalImg.src = img.src;
     captionText.innerHTML = '<div class="well">'+img.alt+'</div>'
+    
+
     //captionText.innerHTML = '<div class="well"><h2></h2></div>';
    }
 

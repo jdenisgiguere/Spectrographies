@@ -1,12 +1,12 @@
 
   
   MODAL 
-  
- - Rendre la photo du modal plus grande
- - Ajouter l'autoportrait de l'auteur dans le modal page ?
+ - Alignement Photo et Caption a ajuster
+ - Ajuster autoportrait et auteur dans la meme div
  - Probleme avec les ponctuation de type / " ' dans les champs de textes
  - Probleme avec les champs : Type et Genre (autre) 
  - Ajouter audio
+ - Ajouter Slider photo
 
   AUDIO
   
