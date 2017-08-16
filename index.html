@@ -382,17 +382,6 @@ margin-bottom: 50px;
 }
 
 
-}
-
-
-
-#img01{
-
- transform: scale(0.5, 0.5);
-      -ms-transform: scale(0.5, 0.5);
-      -webkit-transform: scale(0.5, 0.5);
- 
-}
 
 
 
@@ -605,15 +594,44 @@ margin-bottom: 50px;
   <div id="modalContent" class="container-fluid">
     <div class="row modalContainer">
         <span class="close">&times;</span>
+           
 
       <div id="imgContainer" class=" col-sm-7 col-md-6 col-lg-7 col-xl-7">
-          <img class="img-responsive" id="img01">
-      </div>
-<div class=''>
+          <!--<img class="img-responsive" id="img01">-->
+           <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
 
-      <div id="caption" class=" col-sm-5 col-md-6 col-lg-5 col-xl-5"></div>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img  id="img01" src="https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/c1c98024-5f2f-4bac-a169-909a01573290" alt="Los Angeles">
+                  </div>         
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+
+                    </div>
+
+                    <div class=''>
+
+               <div id="caption" class=" well col-sm-5 col-md-6 col-lg-5 col-xl-5"></div>
      
            </div>
+    
         </div>
    </div>      
   </div>
@@ -732,46 +750,64 @@ $.when(
       
 
      '<div id="popUpOpen"><a href="#" id="titrePopUp"><h2>'
+
+     // Pop Up Content
+    
        +feature.properties.titre
        +'</h2></a><h3 style="display:inline">'
        +feature.properties.genre
        +' & '
        +feature.properties.type
        +'</h3><h4> Par : '
-       +feature.properties.pseudo+
-
-       // Image section with alt attributes as modal text content //
-
-       '</h4><div id=&quot;attributeContainer&quot;><img class="img-thumbnail "id="myImg" alt="<div><h2>'
-       +feature.properties.titre
-       +'</h2><br><h3 style=&quot;display: inline !important;&quot;> Genre : </h3><h4 style=&quot;display: inline !important;&quot;>'
-       +feature.properties.genre+'</h4><br><br><h3 style=&quot;display: inline !important;&quot;> Type : </h3><h4 style=&quot;display: inline !important;&quot;>'
-       +feature.properties.type+'</h4><br><h3> Contexte : </h3><p>'
-       +feature.properties.description_contexte
-       +'</p><div class=&quot;well&quot; style=&quot;margin-top:15px !important&quot;><div class=&quot;col-sm-8 well &quot; ><h3 style=&quot;display: inline !important;&quot;> Auteur : </h3><h4 style=&quot;display: inline !important;&quot;>'
        +feature.properties.pseudo
-        // Autoportrait //
-       +'</h4></div><div class=&quot;col-sm-4 well&quot;><img  id=&quot;selfie&quot; class=&quot;img-thumbnail&quot; src=&quot;'
-       +feature.properties.autoportrait_url.replace('view?photos=','')
-       +'&quot;</img></div><div class=&quot;col well&quot;><h3> Relation au lieu : </h3><p>'
-       +feature.properties.relation_au_lieu_appartenance
-       +'</p></div></div></div>'
-       // Audio //
-       +'<div class=&quot;col  well&quot;>'
-       +'<audio controls controls controlsList=&quot;nodownload&quot;><source src=&quot;'
-       +feature.properties.audio_url.replace('view?audio=','')
-       //+feature.properties.audio_url.replace('view?audio=','')
-       +'&quot;</audio></div></div></div>'
+
+      // Pop up Image section with alt attributes as modal text content //
+
+       +'</h4><div id=&quot;attributeContainer&quot;>'
+       // Image section
+       +'<img class="img-thumbnail "id="myImg"'
+       // Alt section with all the data for the modal popup
+               +' alt="<div><h2>'
+               +feature.properties.titre
+               +'</h2><br><h3 style=&quot;display: inline !important;&quot;> Genre : </h3><h4 style=&quot;display: inline !important;&quot;>'
+               +feature.properties.genre
+               +'</h4><br><br><h3 style=&quot;display: inline !important;&quot;> Type : </h3><h4 style=&quot;display: inline !important;&quot;>'
+               +feature.properties.type
+               +'</h4><br><h3> Contexte : </h3><p>'
+               +feature.properties.description_contexte
+               +'</p><div class=&quot;well&quot; style=&quot;margin-top:15px !important&quot;><div class=&quot;col-sm-8 well &quot; ><h3 style=&quot;display: inline !important;&quot;> Auteur : </h3><h4 style=&quot;display: inline !important;&quot;>'
+               +feature.properties.pseudo
+                // Autoportrait //
+               +'</h4></div><div class=&quot;col-sm-4 well&quot;><img  id=&quot;selfie&quot; class=&quot;img-thumbnail&quot; src=&quot;'
+               +feature.properties.autoportrait_url.replace('view?photos=','')
+               +'&quot;</img></div><div class=&quot;col well&quot;><h3> Relation au lieu : </h3><p>'
+               +feature.properties.relation_au_lieu_appartenance
+               +'</p></div></div></div>'
+               // Audio //
+               +'<div class=&quot;col  well&quot;>'
+               +'<audio controls controls controlsList=&quot;nodownload&quot;><source src=&quot;'
+               +feature.properties.audio_url.replace('view?audio=','')
+               //+feature.properties.audio_url.replace('view?audio=','')
+               +'&quot;</audio></div></div></div>'
+               // End of alt attribution
+               // Caroussel
        +'" src="'
        +feature.properties.photos_url.substring(0,106).replace('view?photos=','') 
        +'"></div></img>'   
-       +/*feature.properties.relation_au_lieu_appartenance.substring(0,140)+
-    ' ... </p><div>'+*/
-     '<iframe src="https://www.facebook.com/plugins/share_button.php?href='
+      
+
+
+
+    // Socials // 
+
+      //Facbook
+     +'<iframe src="https://www.facebook.com/plugins/share_button.php?href='
        + feature.properties.photos_url.replace('view?photos=','')
        +'&layout=button&size=small&mobile_iframe=false&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>'
-       +'  '+
-    '<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
+
+       +'  '
+      //Twitter 
+       +'<iframe id="tweet-button" allowtransparency="true" frameborder="0" scrolling="no"  src="http://platform.twitter.com/widgets/tweet_button.html?url='
        +feature.properties.photos_url.replace('view?photos=','')+
        '&amp;count=horizontal"   style="width:110px; height:20px;"></iframe>')
 
@@ -817,9 +853,8 @@ var captionText = document.getElementById("caption");
     map.closePopup();
     modal.style.display = "block";
     modalImg.src = img.src;
-    captionText.innerHTML = '<div class="well">'+this.alt+'</div>'
-    
-
+    //captionText.innerHTML = '<div class="">'+this.alt+'</div>'
+     captionText.innerHTML = img.alt
 
 };
 
@@ -830,7 +865,13 @@ var captionText = document.getElementById("caption");
     modal.style.display = "block";
    
     modalImg.src = img.src;
-    captionText.innerHTML = '<div class="well">'+img.alt+'</div>'
+    captionText.innerHTML = img.alt
+
+
+
+
+
+
     
 
     //captionText.innerHTML = '<div class="well"><h2></h2></div>';
