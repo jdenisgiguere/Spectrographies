@@ -307,7 +307,7 @@ margin-top: 75px !important;
 }
 
 #imgContainer{
-  align-items: center !important;
+/*  align-items: center !important;*/
   margin-top: -15px !important;
 }
 
@@ -325,7 +325,7 @@ margin-top: 75px !important;
 
 /* Caption of Modal Image */
 #caption {
-    margin: auto;
+    margin: 0;
 
 }
 
@@ -376,7 +376,7 @@ margin-top: 75px !important;
 
 #img01{
 
-  max-width: 80% !important;
+  max-width: 50% !important;
 }
 
 
@@ -590,14 +590,18 @@ margin-top: 75px !important;
     <div class="row modalContainer">
         <span class="close">&times;</span>
 
-      <div id="imgContainer" class=" col-sm-6 col-md-7 col-lg-7">
-          <img class=" img-responsive img-thumbnail" id="img01">
+      <div id="imgContainer" class=" well col-sm-4 col-md-5 col-lg-6">
+          <img class="img-thumbnail" id="img01">
       </div>
-          <div id="caption" class=" col-sm-6 col-md-5 col-lg-5"></div>
-        
+<div class=''>
+
+      <div id="caption" class=" col-sm-8 col-md-7 col-lg-6"></div>
+     
+           </div>
+        </div>
    </div>      
   </div>
-</div>
+
 
 <script>
 
@@ -646,9 +650,18 @@ var group = L.layerGroup();
 var photo_url ="https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/view?photos=03f467ac-5c96-4483-836b-4615e4ef8896"
 var thumbnailphoto = "https://fulcrumapp.s3.amazonaws.com/photos/thumb_73c7ab63-d930-40d0-8d95-3cb6f0da6bb4-71243998-1886-49ce-86e9-d1b0eb48f328.png?AWSAccessKeyId=AKIAINLD3OFR6WK7JO3Q&Signature=BrTEemOGspEKfYuTr56kQ4yvUf4%3D&Expires=1505566588" 
 
+
+
 function getSpectro() {
 $.when(
  $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(filterStories) {
+
+  (function removeNull(o) {
+        for(var key in o) {
+            if( null === o[key] ) o[key] = '';
+            if ( typeof o[key] === 'object' ) removeNull(o[key]);
+        }
+     })(filterStories);
 
   function get_random_color() {
     var letters = '0123456789ABCDEF'.split('');
@@ -671,7 +684,6 @@ $.when(
 
     _marker = filterStories.features;
 
-    
    // _status =filterStories.features.properties.status
 
 //    console.log(_status)
@@ -694,12 +706,13 @@ $.when(
         return L.marker(latlng, {icon:redMarker})
       },
 
+
    
 
     onEachFeature: function(feature, layer) {
      layer.bindPopup(
 
-      //company != null ? company : ""
+
       
 
      '<div id="popUpOpen"><a href="#" id="titrePopUp"><h2>'
@@ -719,15 +732,22 @@ $.when(
        +feature.properties.genre+'</h4><br><br><h3 style=&quot;display: inline !important;&quot;> Type : </h3><h4 style=&quot;display: inline !important;&quot;>'
        +feature.properties.type+'</h4><br><h3> Contexte : </h3><p>'
        +feature.properties.description_contexte
-       +'</p><h3 style=&quot;display: inline !important;&quot;> Auteur : </h3><h4 style=&quot;display: inline !important;&quot;>'
+       +'</p><div class=&quot;well&quot; style=&quot;margin-top:15px !important&quot;><h3 style=&quot;display: inline !important;&quot;> Auteur : </h3><h4 style=&quot;display: inline !important;&quot;>'
        +feature.properties.pseudo
         // Autoportrait //
        +'<div class=&quot;row&quot;><div class=&quot;well&quot; id=&quot;selfieBox&quot;><div> <img  id=&quot;selfie&quot; class=&quot;img-thumbnail&quot; src=&quot;'
        +feature.properties.autoportrait_url.replace('view?photos=','')
        +'&quot;</img></div><div><h3> Relation au lieu : </h3><p>'
        +feature.properties.relation_au_lieu_appartenance
-       +'</p></div></div></div></div>" src="'
-       +feature.properties.photos_url.replace('view?photos=','') 
+       +'</p></div></div>'
+       // Audio //
+       +'<div>'
+       +'<audio controls><source src=&quot;'
+       +feature.properties.audio_url.replace('view?audio=','')
+       //+feature.properties.audio_url.replace('view?audio=','')
+       +'&quot;</audio></div></div></div>'
+       +'" src="'
+       +feature.properties.photos_url.substring(0,106).replace('view?photos=','') 
        +'"></div></img>'   
        +/*feature.properties.relation_au_lieu_appartenance.substring(0,140)+
     ' ... </p><div>'+*/
@@ -743,7 +763,7 @@ $.when(
 });  //end _filtermarker
 
 
-
+//console.log(audioURL)
 
 markerCluster.addLayer(_filteredMarker)
 group.addLayer(_filteredMarker)

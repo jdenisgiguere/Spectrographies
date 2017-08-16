@@ -16,3 +16,50 @@
   
   SLIDER
   
+  QUESTION
+  
+  
+  - Doit on télécharger tous les CDN dans le dossier 
+	(J'imagine que oui en production)
+	
+   
+  
+  
+  
+  
+  
+  
+  var audioURL = function(){
+
+        if (feature.properties.audio_url.replace('view?audio=','') === null ){
+          return 'http://2QMTL0.akacast.akamaistream.net:80/7/953/177387/v1/rc.akacast.akamaistream.net/2QMTL0'
+            }
+          else {
+
+            return feature.properties.audio_url.replace('view?audio=','')
+          }
+
+      };
+ 
+ 
+  var audioURL = function(){
+
+        if (_filteredMarker.properties.audio_url.replace('view?audio=','') === null ){
+          return console.log('http://2QMTL0.akacast.akamaistream.net:80/7/953/177387/v1/rc.akacast.akamaistream.net/2QMTL0')
+            }
+          else {
+
+            return console.log(_filteredMarker.properties.audio_url.replace('view?audio=',''))
+          }
+
+      }; 
+	  
+	  
+	      +'<script>function go(){if('
+       +feature.properties.audio_url.replace('view?audio=','')
+       +'=== null ){return "http://2QMTL0.akacast.akamaistream.net:80/7/953/177387/v1/rc.akacast.akamaistream.net/2QMTL0"} else {return'
+       +feature.properties.audio_url.replace('view?audio=','')
+       +'}};<&#92;script><script>go();<&#92;script>'
+	   
+	   
+	    console.log(photos.substring(0,106).replace('view?photos=','') 
