@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<script type="text/javascript">
+  
+function getPhotos() {
+$.when(
+ $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(filterStories) {
+
+  (function removeNull(o) {
+        for(var key in o) {
+            if( null === o[key] ) o[key] = '';
+            if ( typeof o[key] === 'object' ) removeNull(o[key]);
+        }
+     })(filterStories);
+
+
+ _marker = filterStories.features;
+
+ console.log(_marker);
+
+photosPreURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/"
+
+var urllen = 70
+var photoslen = 36
+
+for(var i = 0; i < _marker.length; i++) {
+    var urllen = 70
+    var photoslen = 39
+
+    var obj = _marker[i].properties.photos_url.substring(70,106)
+    var first =  _marker[i].properties.photos_url.substring(urllen,urllen+photoslen)
+    var sec =  _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*2).replace('%2C','')
+    var trhid =  _marker[i].properties.photos_url.substring(urllen+photoslen*2,urllen+photoslen*3).replace('%2C','')
+    var fourth =  _marker[i].properties.photos_url.substring(urllen+photoslen*3,urllen+photoslen*4).replace('%2C','')
+    var fif =  _marker[i].properties.photos_url.substring(urllen+photoslen*4,urllen+photoslen*5).replace('%2C','')
+    //console.log(obj);
+    //first photo
+       //console.log(photosPreURL+obj)
+    //Second photo
+    console.log(photosPreURL+trhid)
+
+
+}
+
+
+
+
+
+})}
+getPhotos()
+
+
+
+
+</script>
+
+<body>
+
+
+</body>
+</html>
+
+
