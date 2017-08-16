@@ -299,13 +299,19 @@ bottom:0;
 #modalContent {
   margin-top: 25px!important;
   align-items: center !important;
-  display: inline-block;
+  display: inline-block !important;
+  width: 90%;
+  margin-left:5%;
+  margin-bottom: 5%;
+  
 }
 
 .modalContainer{ 
 /*background-color: black !important;*/
 align-items: center !important;
 margin-top: 75px !important;
+margin-bottom: 50px;
+
 
 }
 
@@ -328,7 +334,7 @@ margin-top: 75px !important;
 
 /* Caption of Modal Image */
 #caption {
-    margin: 0;
+    margin: auto;
 
 }
 
@@ -356,7 +362,7 @@ margin-top: 75px !important;
     top: 25px;
     right: 45px;
     color: #f1f1f1;
-    font-size: 100px;
+    font-size: 75px;
     font-weight: bold;
     transition: 0.3s;
 }
@@ -378,6 +384,8 @@ margin-top: 75px !important;
 
 }
 
+
+
 #img01{
 
  transform: scale(0.5, 0.5);
@@ -385,6 +393,7 @@ margin-top: 75px !important;
       -webkit-transform: scale(0.5, 0.5);
  
 }
+
 
 
 /***************** END OF THE MODAL ********************/
@@ -733,7 +742,7 @@ $.when(
 
        // Image section with alt attributes as modal text content //
 
-       '</h4><div><img class="img-thumbnail "id="myImg" alt="<div><h2>'
+       '</h4><div id=&quot;attributeContainer&quot;><img class="img-thumbnail "id="myImg" alt="<div><h2>'
        +feature.properties.titre
        +'</h2><br><h3 style=&quot;display: inline !important;&quot;> Genre : </h3><h4 style=&quot;display: inline !important;&quot;>'
        +feature.properties.genre+'</h4><br><br><h3 style=&quot;display: inline !important;&quot;> Type : </h3><h4 style=&quot;display: inline !important;&quot;>'
