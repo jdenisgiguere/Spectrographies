@@ -610,7 +610,19 @@ margin-bottom: 50px;
                 <div class="carousel-inner">
                   <div class="item active">
                     <img  id="img01" >
-                  </div>         
+                  </div>  
+                  <div class="item">
+                    <img  id="img02" >
+                  </div>  
+                  <div class="item">
+                    <img  id="img03" >
+                  </div>  
+                   <div class="item">
+                    <img  id="img04" >
+                  </div>  
+                   <div class="item">
+                    <img  id="img05" >
+                  </div>  
                 </div>
 
                 <!-- Left and right controls -->
@@ -666,8 +678,15 @@ var map = L.map('map', {
 
 
 
-var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg').addTo(map);
+var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
 
+var baseLayer2 = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.{ext}', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  minZoom: 0,
+  maxZoom: 20,
+  ext: 'png'
+}).addTo(map);
 
 
 var markerCluster = L.markerClusterGroup({
@@ -724,50 +743,94 @@ $.when(
          //   var test = for (i = 0; i<feature.properties.status;i++)
 /////////////////////////////////////////////////////////////////////
 
-map.on('popupopen', function () {
-      // Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-
-var h2 = document.getElementById('titrePopUp');
-
-var img = document.getElementById('myImg');
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-
-    img.onclick = function(){
-
-    map.closePopup();
-    modal.style.display = "block";
-    modalImg.src = img.src;
-    //captionText.innerHTML = '<div class="">'+this.alt+'</div>'
-     captionText.innerHTML = img.alt
-    };
-
-    h2.onclick = function(){
-    map.closePopup();
-    modal.style.display = "block";
-    modalImg.src = img.src;
-    captionText.innerHTML = img.alt
-    }
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() { 
-    modal.style.display = "none";
-}
 
 
-$('modalImg').on('click', function() {
-        $('.modal').hide();
-      });
+///////////////////////POP UP ////////////////////////////////////////////
+photosPreURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/"
+
+var first =""
+
+var urllen = 70
+var photoslen = 36
+      function photoURL(j){
+        for(var i = 0; i < _marker.length; i++) {
+        var urllen = 70
+        var photoslen = 39
+
+         obj = _marker[i].properties.photos_url.substring(70,106)
+         first =  _marker[i].properties.photos_url.substring(urllen,urllen+photoslen).replace('%2C','')
+         sec =  _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*2).replace('%2C','')
+         third = _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*3).replace('%2C','')
+         fourth = _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*4).replace('%2C','')
+         fifth =  _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*5).replace('%2C','')
+
+    return (photosPreURL+j)
+    
+    }}
+
+     
+
+
+      var image = new Image();
+      image.src = photoURL(first)
+      var image2 = new Image();
+      image2 .src = photoURL(sec)
+      var image3 = new Image();
+      image3.src = photoURL(third)
+      var image4 = new Image();
+      image4 .src = photoURL(fourth)
+      var image5 = new Image();
+      image5 .src = photoURL(fifth)
+
+      map.on('popupopen', function () {
+            // Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the image and insert it inside the modal - use its "alt" text as a caption
+
+      var h2 = document.getElementById('titrePopUp');
+      var img = document.getElementById('myImg');
+      var modalImg = document.getElementById("img01");
+      var modalImg2 = document.getElementById("img02");
+      var modalImg3 = document.getElementById("img03");
+      var modalImg4 = document.getElementById("img04");
+      var modalImg5 = document.getElementById("img05");
+      var captionText = document.getElementById("caption");
+
+          img.onclick = openModal
+          h2.onclick = openModal
+
+           function openModal(){
+            map.closePopup();
+            modal.style.display = "block";
+
+            modalImg.src = image.src;
+            modalImg2.src = image2.src;
+            modalImg3.src = image3.src;
+            modalImg4.src = image4.src;
+            modalImg5.src = image5.src;
+            captionText.innerHTML = img.alt
+
+
+              // Get the <span> element that closes the modal
+              var span = document.getElementsByClassName("close")[0];
+
+              // When the user clicks on <span> (x), close the modal
+              span.onclick = function() { 
+                  modal.style.display = "none";
+              }
+
+
+              $('modalImg').on('click', function() {
+                $('.modal').hide();
+                  });
+
+          };
+ 
 
     });
 
-
+/////////////////////////////////////////////////////////////////////////////
 
     _filteredMarker = new L.geoJSON(_marker, {
 
@@ -867,7 +930,7 @@ $('modalImg').on('click', function() {
 
 
 //console.log(audioURL)
-return _filteredMarker.addTo(map)
+//return _filteredMarker.addTo(map)
 markerCluster.addLayer(_filteredMarker)
 group.addLayer(_filteredMarker)
 map.addLayer(markerCluster)  
