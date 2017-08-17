@@ -23,16 +23,18 @@
 
 
 
-
+       
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="js/leaflet.extra-markers.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster-src.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
     <script src="js/main.js"></script>
 
     <div class="container-fluid" id="map"> </div>
@@ -56,11 +58,8 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Participant</label>
-                            <select id="single" class="form-control select2-single">
-                                <option></option>
-                                <optgroup label="Alaskan/Hawaiian Time Zone">
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI" disabled="disabled">Hawaii</option>
+                             <select id="participantBox" class="form-control select2-multiple">
+                                    <option></option>
                             </select>
                         </div>
                     </div>
@@ -68,11 +67,11 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Type</label>
-                            <select id="single" class="form-control select2-single">
+                            <select id="typeBox" class="form-control select2-single">
                                 <option></option>
                                 <optgroup label="Alaskan/Hawaiian Time Zone">
                                     <option value="AK">Alaska</option>
-                                    <option value="HI" disabled="disabled">Hawaii</option>
+                                    <option value="HI" ">Hawaii</option>
                             </select>
                         </div>
                     </div>
@@ -81,11 +80,11 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Genre</label>
-                            <select id="single" class="form-control select2-single">
+                            <select id="genreBox" class="form-control select2-single">
                                 <option></option>
                                 <optgroup label="Alaskan/Hawaiian Time Zone">
                                     <option value="AK">Alaska</option>
-                                    <option value="HI" disabled="disabled">Hawaii</option>
+                                    <option value="HI" ">Hawaii</option>
                             </select>
                         </div>
                     </div>
@@ -93,11 +92,11 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Média</label>
-                            <select id="single" class="form-control select2-single">
+                            <select id="mediaBox" class="form-control select2-single">
                                 <option></option>
                                 <optgroup label="Alaskan/Hawaiian Time Zone">
                                     <option value="AK">Alaska</option>
-                                    <option value="HI" disabled="disabled">Hawaii</option>
+                                    <option value="HI" ">Hawaii</option>
                             </select>
                         </div>
                     </div>
@@ -221,7 +220,49 @@
             </div>
         </div>
     </div>
+<script type="text/javascript">
 
+/*var auteurs = ['albert','prince','test']
+
+///creation de la searchbox//
+ function searchBoxAuteur() {
+  $('#participantBox').select2(
+   {data: auteurs})
+ }
+ searchBoxAuteur()
+
+
+// function récupère la valeur du searchbox
+    $("#participantBox").on("select2:select", function(e) {
+ pseudoValue = $(e.currentTarget).val();
+  alert(pseudoValue)
+});
+ */
+
+/*
+function pnicoFilter(marker) {
+  if (marker.properties.pseudo === pseudoValue) return true
+}
+
+ function nico(){
+
+     introMarker = L.geoJSON(mainMarker, {
+
+        filter: function(feature, layer) {
+    return pnicoFilter; 
+}
+ }).addTo(map)
+
+
+     map.fitBounds(introMarker.getBounds())
+     
+ }
+
+ nico()
+*/
+
+     
+</script>
 
 </head>
 </body>

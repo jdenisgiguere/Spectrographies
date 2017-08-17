@@ -7,7 +7,9 @@ var map = L.map('map', {
 
 
 
-var baseLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
+var mapbox1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
+
+var mapbox2 =  L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66v7isf7jji2soaolfu28sy/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
 
 var baseLayer2 = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -15,8 +17,7 @@ var baseLayer2 = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-bac
   minZoom: 0,
   maxZoom: 20,
   ext: 'png'
-}).addTo(map);
-
+}).addTo(map)
 
 var markerCluster = L.markerClusterGroup({
   spiderfyOnMaxZoom: true,
@@ -94,25 +95,27 @@ img.onclick = function(){
             return x.substring(70).split('%2C')}
             }
 
-          function test(){for(var i = 0; i < photos_uuid(j).length ; i++) {
+          function test(){for(var i = 0; i < divsFromPhotosUrl(x).length ; i++) {
            return carouselDiv.innerHTML = divsFromPhotosUrl(photos_uuid(x))
          }}
-         console.log(test())
+ 
           test()
 
 ////////////////////////////////////////////////////
 
 
-k = x
+var k
 
 function divsFromPhotosUrl(k) {
  var photos = photos_uuid(k)
+ console.log(photos_uuid(k))
  var divsAsText = '';
  var currentDiv;
   for(var i = 0; i < photos.length ; i++) {
     currentDiv = '<div class="item active"><img src="'+baseURL+photos[i]+'" id="img0'+i+'" ></div>';
-    divsAsText = divsAsText + currentDiv;
-     return divsAsText;
+   // divsAsText = divsAsText + currentDiv;
+   console.log(currentDiv)
+     return currentDiv;
    }}
 
 
@@ -199,7 +202,30 @@ function divsFromPhotosUrl(k) {
 
 
 
-});  //end _filtermarker
+});  //end marker
+
+
+
+var introMarker = L.geoJSON();
+var data = []
+marker.eachLayer(function(layer) {
+  
+  data.push(layer.feature.properties.pseudo);
+});
+
+console.log(data)
+
+
+
+///creation de la searchbox//
+ function searchBoxAuteur() {
+  $('#participantBox').select2(
+   {data: data
+     })
+ }
+ searchBoxAuteur()
+
+
 
 //return _filteredMarker.addTo(map)
 markerCluster.addLayer(marker)
@@ -207,8 +233,44 @@ group.addLayer(marker)
 map.addLayer(markerCluster)  
 map.fitBounds(marker.getBounds())
 
+
    });
+} //////////////////////////// end of getGEOJson ///////////////////////////////////
+
+getGeoJSON()
+
+
+function getFilterGeoJSON() {
+$.when(
+ $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(theGeoJSON) {
+
+  (function removeNull(o) {
+        for(var key in o) {
+            if( null === o[key] ) o[key] = '';
+            if ( typeof o[key] === 'object' ) removeNull(o[key]);
+        }
+     })(theGeoJSON);
+
+markers = theGeoJSON.features;
+
+/////  L.Geojson //////
+filteredMarker = new L.geoJSON(markers,{
+filter: function(feature, layer) {
+  if (feature.properties.pseudo === pseudoValue) return true
 }
+  })
+//////////////////////
+
+map.removeLayer(markerCluster)
+//markerCluster.addLayer(filteredMarker)
+//group.addLayer(filteredMarker)
+map.addLayer(filteredMarker)  
+map.fitBounds(filteredMarker.getBounds())
+   
+}
+)}
+
+
 
 // Click outside the header info div collapse //
 
@@ -218,7 +280,12 @@ $(document).click(function(e) {
     }
 });
 
+$("#participantBox").on("select2:select", function(e) {
 
-getGeoJSON()
+ pseudoValue = $(e.currentTarget).val();
+ 
+getFilterGeoJSON()
+
+});
 
 })
