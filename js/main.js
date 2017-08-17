@@ -64,7 +64,36 @@ marker = new L.geoJSON(markers, {
 
   onEachFeature: function(feature, layer) {
 
-var baseURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/"
+
+    /**
+     * Get a search parameter by its name
+     * https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+     *
+     * @param name :  string Name of the parameters
+     * @param url : string URL to parse
+     * @returns {*}
+     */
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    /**
+     * Array of the photos associated to the photos url
+     *
+     * @param photos_url
+     * @returns {Array|*}
+     */
+     function photos_uuid(photos_url) {
+       return getParameterByName('photos', photos_url).split(',');
+     }
+
+var baseURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/";
 var div1 = '<div class="item active"><img src="'+baseURL+feature.properties.photos_url.substring(70,106)+'" id="img01" ></div>'
 var div2 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(109,145)+'" id="img02" ></div>'
 var div3 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(148,184)+'" id="img03" ></div>'
