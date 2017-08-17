@@ -9,15 +9,15 @@ var map = L.map('map', {
 
 var mapbox1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
 
-var mapbox2 =  L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66v7isf7jji2soaolfu28sy/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
+var mapbox2 =  L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66v7isf7jji2soaolfu28sy/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg').addTo(map)
 
 var baseLayer2 = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   subdomains: 'abcd',
   minZoom: 0,
-  maxZoom: 20,
+  maxZoom: 18,
   ext: 'png'
-}).addTo(map)
+})
 
 var markerCluster = L.markerClusterGroup({
   spiderfyOnMaxZoom: true,
@@ -207,24 +207,49 @@ function divsFromPhotosUrl(k) {
 
 
 var introMarker = L.geoJSON();
-var data = []
+var pseudoData = []
+var typeData = []
+var genreData = []
+var titreData = []
+
 marker.eachLayer(function(layer) {
   
-  data.push(layer.feature.properties.pseudo);
+  pseudoData.push(layer.feature.properties.pseudo)
+  typeData.push(layer.feature.properties.type)
+  genreData.push(layer.feature.properties.genre)
+  titreData.push(layer.feature.properties.titre)
 });
 
-console.log(data)
-
-
+console.log(pseudoData)
+console.log(typeData)
+console.log(genreData)
+console.log(titreData)
 
 ///creation de la searchbox//
- function searchBoxAuteur() {
-  $('#participantBox').select2(
-   {data: data
-     })
- }
- searchBoxAuteur()
 
+ function pBox() {
+  $('#participantBox').select2(
+   {data: pseudoData
+     })
+ } pBox()
+
+function tBox() {
+  $('#typeBox').select2(
+   {data: typeData
+     })
+ } tBox()
+
+ function gBox() {
+  $('#genreBox').select2(
+   {data: genreData
+     })
+ }gBox()
+
+ function titBox() {
+  $('#titreBox').select2(
+   {data: titreData
+     })
+ }titBox()
 
 
 //return _filteredMarker.addTo(map)
@@ -239,8 +264,8 @@ map.fitBounds(marker.getBounds())
 
 getGeoJSON()
 
-
-function getFilterGeoJSON() {
+//////////////////////////// Filter Function ///////////////////////////////////
+function getFilterGeoJSON(value) {
 $.when(
  $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(theGeoJSON) {
 
@@ -254,18 +279,39 @@ $.when(
 markers = theGeoJSON.features;
 
 /////  L.Geojson //////
-filteredMarker = new L.geoJSON(markers,{
+filteredMarker = new L.geoJSON(markers,
+{
+
+pointToLayer: function(feature, latlng) {
+
+     var customMarker = new L.ExtraMarkers.icon(
+     {
+          icon: 'glyphicon-eye-open',
+          markerColor: 'yellow',
+          shape: 'penta',
+          prefix: 'glyphicon'
+        });
+
+        return L.marker(latlng, {icon:customMarker})       
+      },
+
+
 filter: function(feature, layer) {
-  if (feature.properties.pseudo === pseudoValue) return true
-}
+  if (feature.properties.pseudo === value)
+    {return true}
+  else if (feature.properties.type === value){ return true}
+  else if (feature.properties.genre === value){ return true}
+  else if (feature.properties.titre === value){ return true}
+      }
   })
+
 //////////////////////
 
 map.removeLayer(markerCluster)
 //markerCluster.addLayer(filteredMarker)
 //group.addLayer(filteredMarker)
 map.addLayer(filteredMarker)  
-map.fitBounds(filteredMarker.getBounds())
+map.flyToBounds(filteredMarker.getBounds())
    
 }
 )}
@@ -282,9 +328,33 @@ $(document).click(function(e) {
 
 $("#participantBox").on("select2:select", function(e) {
 
- pseudoValue = $(e.currentTarget).val();
+ value = $(e.currentTarget).val();
  
-getFilterGeoJSON()
+getFilterGeoJSON(value)
+
+});
+
+$("#typeBox").on("select2:select", function(e) {
+
+ value = $(e.currentTarget).val();
+ 
+getFilterGeoJSON(value)
+
+});
+
+$("#genreBox").on("select2:select", function(e) {
+
+ value = $(e.currentTarget).val();
+ 
+getFilterGeoJSON(value)
+
+});
+
+$("#titreBox").on("select2:select", function(e) {
+
+ value = $(e.currentTarget).val();
+ 
+getFilterGeoJSON(value)
 
 });
 
