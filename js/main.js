@@ -126,14 +126,29 @@ function photoCount(){
     else if (feature.properties.photos_url.length === 106) {
     //return console.log("J'ai 1 photos")
     return div1
-    }};
+    }}
 
-photoCount()
+    function divsFromPhotosUrl(photos_url) {
+  var photos = photos_uuid(photos_url);
+  var divsAsText = '';
+  var currentDiv;
+  for(var i = 0; i < photos_uuid.length; i++) {
+    if (i == 0) {
+      currentDiv = '<div class="item active"><img src="'+baseURL+photos[i]+'" id="img'+i+'" ></div>';
+    } else {
+      currentDiv = '<div class="item"><img src="'+baseURL+photos[i]+'" id="img'+i+'" ></div>';
+    }
 
+    divsAsText = divsAsText + currentDiv;
+  }
+
+  return divsAsText;
+
+    }
 
     
 // Capture le pop up //
-map.on('popupopen', function () {
+map.on('popupopen', function (e) {
                  
       var h2 = document.getElementById('titrePopUp');
       var img = document.getElementById('myImg');
@@ -146,7 +161,7 @@ map.on('popupopen', function () {
            map.closePopup();
            modal.style.display = "block";
            captionText.innerHTML = img.alt
-           carouselDiv.innerHTML = photoCount()
+           carouselDiv.innerHTML = divsFromPhotosUrl(e.popup._source.feature.properties.photos_url);
 
 
     // Fonction pour fermer le modal //
