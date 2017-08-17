@@ -65,46 +65,14 @@ marker = new L.geoJSON(markers, {
   onEachFeature: function(feature, layer) {
 
 var baseURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/"
-var div1 = '<div class="item active"><img src="'+baseURL+feature.properties.photos_url.substring(70,106)+'" id="img01" ></div>'
-var div2 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(109,145)+'" id="img02" ></div>'
-var div3 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(148,184)+'" id="img03" ></div>'
-var div4 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(187,223)+'" id="img04" ></div>'
-var div5 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(226,262)+'" id="img05" ></div>'
+
+// Fonction qui récupère le UUID de chaque photos
 
 
-function photoCount(){
-        
-    if (feature.properties.photos_url.length === 262) {
-    return div1+div2+div3+div4+div5
-    //return console.log("J'ai 5 photos")
-    }
+var x 
 
-    else if (feature.properties.photos_url.length === 223) {
-   // return console.log("J'ai 4 photos")
-    return div1+div2+div3+div4
-    }
-
-    else if (feature.properties.photos_url.length === 184) {
-    //return console.log("J'ai 3 photos")
-     return div1+div2+div3
-    }
-
-    else if (feature.properties.photos_url.length === 145) {
-     //return console.log("J'ai 2 photos")
-     return div1+div2
-    }
-
-    else if (feature.properties.photos_url.length === 106) {
-    //return console.log("J'ai 1 photos")
-    return div1
-    }};
-
-photoCount()
-
-
-    
 // Capture le pop up //
-map.on('popupopen', function () {
+map.on('popupopen', function (e) {
                  
       var h2 = document.getElementById('titrePopUp');
       var img = document.getElementById('myImg');
@@ -113,11 +81,44 @@ map.on('popupopen', function () {
       var carouselDiv = document.getElementById("carousel-inner")
 
     // Fonction pour creer le contenu du modal //
-          img.onclick = function(){ 
+img.onclick = function(){ 
            map.closePopup();
            modal.style.display = "block";
            captionText.innerHTML = img.alt
-           carouselDiv.innerHTML = photoCount()
+           //carouselDiv.innerHTML = photoCount()
+           var x= (e.popup._source.feature.properties.photos_url)
+           var j
+          function photos_uuid(j){
+              j = x
+              for(var i = 0; i < j.length; i++) {
+            return x.substring(70).split('%2C')}
+            }
+
+          function test(){for(var i = 0; i < photos_uuid(j).length ; i++) {
+           return carouselDiv.innerHTML = divsFromPhotosUrl(photos_uuid(x))
+         }}
+         console.log(test())
+          test()
+
+////////////////////////////////////////////////////
+
+
+k = x
+
+function divsFromPhotosUrl(k) {
+ var photos = photos_uuid(k)
+ var divsAsText = '';
+ var currentDiv;
+  for(var i = 0; i < photos.length ; i++) {
+    currentDiv = '<div class="item active"><img src="'+baseURL+photos[i]+'" id="img0'+i+'" ></div>';
+    divsAsText = divsAsText + currentDiv;
+     return divsAsText;
+   }}
+
+
+
+
+
 
 
     // Fonction pour fermer le modal //
