@@ -1,520 +1,111 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Spectrographie(s) v1</title>
+
+    <link rel="stylesheet" href="src/bootstrap-3.3.7\dist\css\bootstrap.css">
+    <link href="src/style/navbar-fixed-side.css" rel="stylesheet" />
+    <link href="src/modal_sidebar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/leaflet.extra-markers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster-src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js"></script>
+
+
+    <div class="container-fluid" id="map"> </div>
+
+
+    <!-- Left Menu -->
+
+    <div id="menu" class="container-fluid">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <nav class="navbar navbar-default navbar-fixed-side" id="navBarLeft">
+
+                <!-- Header -->
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href=""><h3> Navigation </h3></a>
+                </div>
+
+
+                <!-- Select lists -->
+                <div class="container-fluid ">
+                    <div class="well formContainer">
+                        <div class="form-group">
+                            <label for="single" class="control-label">Participant</label>
+                            <select id="single" class="form-control select2-single">
+                                <option></option>
+                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI" disabled="disabled">Hawaii</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="well formContainer">
+                        <div class="form-group">
+                            <label for="single" class="control-label">Type</label>
+                            <select id="single" class="form-control select2-single">
+                                <option></option>
+                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI" disabled="disabled">Hawaii</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="well formContainer">
+                        <div class="form-group">
+                            <label for="single" class="control-label">Genre</label>
+                            <select id="single" class="form-control select2-single">
+                                <option></option>
+                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI" disabled="disabled">Hawaii</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="well formContainer">
+                        <div class="form-group">
+                            <label for="single" class="control-label">Média</label>
+                            <select id="single" class="form-control select2-single">
+                                <option></option>
+                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI" disabled="disabled">Hawaii</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </nav>
 
-<title>Spectrographie(s) v1</title>
-
-<link rel="stylesheet" href="src/bootstrap-3.3.7\dist\css\bootstrap.css">
-<link href="src/style/navbar-fixed-side.css" rel="stylesheet" />
-<link href="src/modal_sidebar.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
-<link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
-<!-- Magnific Popup core CSS file -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
-
-
-
-
-
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- Magnific Popup core JS file -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="js/leaflet.extra-markers.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster-src.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js"></script>
-
-
-<style type="text/css">
-  
-
-
-
-html, body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background-color: white;
-}
-
-
-/* h3{
-
-  display: inline !important;
-}*/
-
-.navbar .navbar-header {
-
-background-color: rgba(255, 255, 255,1);
-
-}
-
-/* Portrait phones and smaller */
-@media (min-width: 0px) and  (max-width: 359px) {
-
-
-#menu{
-  display: none !important;
-  visibility: hidden !important;
-}
-
-#map{
-
- width: 100% !important;
- height: 74% !important;
- bottom: 0 !important;
- left: 0 !important;
- margin:0 !important;
-  }
-
-
-}
-
-
-/* Portrait phones and smaller */
-@media (min-width: 360px) and  (max-width: 459px) {
-
-#menu{
-  display: none !important;
-  visibility: hidden !important;
-}
-
-#map{
-
- width: 100% !important;
- height: 84% !important;
- bottom: 0 !important;
- left: 0 !important;
- margin:0 !important;
-  }
-
-
-}
-
-/* Desktop Responsive window */
-@media (min-width: 460px) and  (max-width: 766px) {
-
-#menu{
-  display: none !important;
-  visibility: hidden !important;
-}
-
-#map{
-
- width: 100% !important;
- height: 84% !important;
- bottom: 0 !important;
- left: 0 !important;
- margin:0 !important;
-  }
-
-
-}
-
-
-/* Portrait tablets and small desktops */
-@media (min-width: 767px) and (max-width: 991px) {
-
-
-
-#map{
-
- width: 70% !important;
- height: 90% !important;
- bottom: 0 !important;
- left: 30% !important;
- margin:0 !important;
-  }
-
-#navBarLeft{
-  height: 95% !important;;
-  width: 30% !important;
-  left: 0 !important;;
-
-
-}
-
-}
-
-
-/* Landscape tablets and medium desktops */
-@media (min-width: 992px) and (max-width: 1199px) {
-
-
-#map{
-
- width: 75% !important;
- height: 92% !important;
- bottom: 0 !important;
- left: 25% !important;
- margin:0 !important;
-  }
-
-#navBarLeft{
-  height: 100% !important;;
-  width: 25% !important;
-  left: 0 !important;;
-
-
-}
-
-}
-
-/* Large desktops and laptops */
-@media (min-width: 1200px) and (max-width: 1599px) {
-
-#map{
-
- width: 80% !important;
- height: 93% !important;
- bottom: 0 !important;
- left: 20% !important;
- margin:0 !important;
-  }
-
-#navBarLeft{
-  height: 101% !important;;
-  width: 20% !important;
-  left: 0 !important;;
-
-
-}
-
-}
-
-/* Extra Large desktops and laptops */
-@media (min-width: 1600px) and (max-width: 1980px) {
-
-#map{
-
- width: 80% !important;
- height: 93% !important;
- bottom: 0 !important;
- left: 20% !important;
- margin:0 !important;
-  }
-
-#navBarLeft{
-  height: 101% !important;;
-  width: 20% !important;
-  left: 0 !important;;
-
-
-}
-
-
-}
-
-
-
-
-
-#map{
-
- position:absolute;
- width:85%;
- left: 15%;
- height:93%;
- z-index: 0;
- bottom: 0;
-  }
-
-
-#togglebtn{
-
-left:5%;
-background-color: rgba(255, 255, 255,0);
-display:inline-block;
-
-}
-
-#toggle-bar{
-background-color: white;
-float: left;
-bottom:0;
-}
-
-
-
-.leaflet-popup-content-wrapper,.leaflet-popup-content
- {
-   -webkit-border-radius: 0 !important;
-   -moz-border-radius: 0 !important;
-    border-radius: 0 !important;
-    background-color: rgba(255,255,255,0.8)
-    
-
- }
-
-#myImg {
-    margin-bottom: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-    /*transform: scale(0.5, 0.5);
-      -ms-transform: scale(0.5, 0.5);
-      -webkit-transform: scale(0.5, 0.5);*/
-}
-
-#myImg:hover {opacity: 0.7;}
-
-/***************** THE MODAL ********************/
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 50px !important;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
-    align-items: center !important;
-    /*min-height: 100%;*/
-}
-
-/* Modal Content (image) */
-
-
-
-#modalContent {
-  margin-top: 25px!important;
-  align-items: center !important;
-  display: inline-block !important;
-  width: 90%;
-  margin-left:5%;
-  margin-bottom: 5%;
-  
-}
-
-.modalContainer{ 
-/*background-color: black !important;*/
-align-items: center !important;
-margin-top: 75px !important;
-margin-bottom: 50px;
-
-
-}
-
-#imgContainer{
-/*  align-items: center !important;*/
-  margin-top: 50px !important;
-}
-
-/*
-.modal-content {
-    margin-top:50px;
-    margin-left: 50px;
-    display: inline-block;
-    width: 50%;
-    max-width: 400px;
-}*/
-
-
-
-
-/* Caption of Modal Image */
-#caption {
-    margin: auto;
-
-}
-
-/* Add Animation */
-.modal-content, #caption {    
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
-
-@-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
-    to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-    from {transform:scale(0)} 
-    to {transform:scale(1)}
-}
-
-/* The Close Button */
-.close {
-    position: absolute;
-    top: 25px;
-    right: 45px;
-    color: #f1f1f1;
-    font-size: 75px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#selfie{
-
- max-height: 20%;
- width: auto;
-
-}
-
-
-
-
-
-/***************** END OF THE MODAL ********************/
-
-.navbar-header {
-  float: none;
-  background-color: white;
-}
-.navbar-toggle {
-  display: inline-block;
-}
-.navbar-collapse.collapse {
-  display: none!important;
-}
-.navbar-nav {
-  float: none!important;
-}
-.navbar-nav>li {
-  float: none;
-}
-.navbar-collapse.collapse.in{
-  display:block !important;
-}
-
-
-
-
-.navbar-toggle .icon-bar {
-  display: block;
-  width: 33px;
-  height: 4px;
-  background-color: rgb(238,51,255);
-  border-radius: 1px;
-  margin-top: 33%;
-}
-
-.formContainer{
-  margin:20px;
-}
-
-
-
-#navBarLeft{
-  margin:auto;
-  height: 100%;
-  
-  width: 15%;
-  top: 15%;
-  left: 0;
-  bottom: 0;
-}
-
-
-
-
-
-
-</style>
-
-
-
-<div class="container-fluid" id="map"> </div>
-
-
-<!-- Left Menu -->
-
-<div id="menu" class="container-fluid">
-    <div  class="col-sm-6 col-md-6 col-lg-6">
-        <nav class="navbar navbar-default navbar-fixed-side" id="navBarLeft">
-
-<!-- Header -->
-
-              <div class="navbar-header">
-                <a class="navbar-brand" href=""><h3> Navigation </h3></a>
-              </div>           
-
-
-<!-- Select lists -->
-     <div class="container-fluid ">           
-      <div  class="well formContainer">
-        <div class="form-group">
-                  <label for="single" class="control-label">Participant</label>
-                  <select id="single" class="form-control select2-single">
-                    <option></option>
-                    <optgroup label="Alaskan/Hawaiian Time Zone">
-                      <option value="AK">Alaska</option>
-                      <option value="HI" disabled="disabled">Hawaii</option>
-                   </select>
         </div>
-      </div>
-
-      <div class="well formContainer">
-        <div class="form-group">
-                  <label for="single" class="control-label">Type</label>
-                  <select id="single" class="form-control select2-single">
-                    <option></option>
-                    <optgroup label="Alaskan/Hawaiian Time Zone">
-                      <option value="AK">Alaska</option>
-                      <option value="HI" disabled="disabled">Hawaii</option>
-                   </select>
-        </div>
-      </div>
-
-
-      <div class="well formContainer">
-        <div class="form-group">
-                  <label for="single" class="control-label">Genre</label>
-                  <select id="single" class="form-control select2-single">
-                    <option></option>
-                    <optgroup label="Alaskan/Hawaiian Time Zone">
-                      <option value="AK">Alaska</option>
-                      <option value="HI" disabled="disabled">Hawaii</option>
-                   </select>
-        </div>
-      </div>
-
-      <div class="well formContainer">
-        <div class="form-group">
-                  <label for="single" class="control-label">Média</label>
-                  <select id="single" class="form-control select2-single">
-                    <option></option>
-                    <optgroup label="Alaskan/Hawaiian Time Zone">
-                      <option value="AK">Alaska</option>
-                      <option value="HI" disabled="disabled">Hawaii</option>
-                   </select>
-        </div>
-      </div>
-     </div>  
-
-     </nav>
-
-     </div>
 
     </div>
 
@@ -522,61 +113,60 @@ margin-bottom: 50px;
 
 
 
+    <nav class="navbar navbar-fixed-top">
 
+        <div class="navbar-header" id="navBarTop">
 
+            <div id=toggle-bar>
+                <button type="button" id="togglebtn" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-
-<nav class="navbar navbar-fixed-top" >
-
-  <div class="navbar-header" id="navBarTop">
-
-  <div id=toggle-bar>
-    <button type="button" id="togglebtn" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-  </div>
-
-<div id='title'>
-  <h1>
+            <div id='title'>
+                <h1>
     Spectrographie(s) du territoire
   </h1>
-<div>
+                <div>
 
 
 
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-      <div class="well">
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <div class="well">
 
-         <h4> À propos de Spectrographies</h4>
-        
-         <p> 
+                                <h4> À propos de Spectrographies</h4>
 
-            Où suis-je ? <br>
-            Chez qui suis-je ? <br>
-            Que me propose-t-on ? <br>
-            Sous quelles conditions ? <br>
-            Qu’est-ce qui pourrait m’amener à revenir ? <br>
-            L’information est-elle à jour ? <br>
-            Puis-je contacter les propriétaires du site ? <br>
-            Suis-je arrivé à tout lire sans m’endormir ? <br> </p>
-            
+                                <p>
 
-            <h4> Contact </h4>
-            <hr>
-            <p> Natacha Clitandre : <a> + 1 514-555-5555</a></p>
-            <p> Courriel : <a> abcd@gmail.com </a> </p>
-            <hr>
-            <p> Agence TOPO : <a> + 1 514-555-5555</a></p>
-            <p> Courriel : <a> abcd@gmail.com </a> </p>
-         
-      </div>
-    </ul>
+                                    Où suis-je ?
+                                    <br> Chez qui suis-je ?
+                                    <br> Que me propose-t-on ?
+                                    <br> Sous quelles conditions ?
+                                    <br> Qu’est-ce qui pourrait m’amener à revenir ?
+                                    <br> L’information est-elle à jour ?
+                                    <br> Puis-je contacter les propriétaires du site ?
+                                    <br> Suis-je arrivé à tout lire sans m’endormir ?
+                                    <br> </p>
 
 
-    <!--USERNAME  could be used for linking to the Fulcrum Admin Page 
+                                <h4> Contact </h4>
+                                <hr>
+                                <p> Natacha Clitandre : <a> + 1 514-555-5555</a>
+                                </p>
+                                <p> Courriel : <a> abcd@gmail.com </a> </p>
+                                <hr>
+                                <p> Agence TOPO : <a> + 1 514-555-5555</a>
+                                </p>
+                                <p> Courriel : <a> abcd@gmail.com </a> </p>
+
+                            </div>
+                        </ul>
+
+
+                        <!--USERNAME  could be used for linking to the Fulcrum Admin Page 
 
     <div class="navbar-header navbar-right">
       <p class="navbar-text">
@@ -587,90 +177,56 @@ margin-bottom: 50px;
     -->
 
 
-</nav>
+    </nav>
 
 
-<div id="myModal" class="modal">
-  <div id="modalContent" class="container-fluid">
-    <div class="row modalContainer">
-        <span class="close">&times;</span>
-           
+    <div id="myModal" class="modal">
+        <div id="modalContent" class="container-fluid">
+            <div class="row modalContainer">
+                <span class="close">&times;</span>
 
-      <div id="imgContainer" class=" col-sm-7 col-md-6 col-lg-7 col-xl-7">
-          <!--<img class="img-responsive" id="img01">-->
-           <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                  <div class="item active">
-                    <img  id="img01" >
-                  </div>  
-                  <div class="item">
-                    <img  id="img02" >
-                  </div>  
-                  <div class="item">
-                    <img  id="img03" >
-                  </div>  
-                   <div class="item">
-                    <img  id="img04" >
-                  </div>  
-                   <div class="item">
-                    <img  id="img05" >
-                  </div>  
-                </div>
+                <div id="imgContainer" class=" col-sm-7 col-md-6 col-lg-7 col-xl-7">
+                    <!--<img class="img-responsive" id="img01">-->
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
 
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>
+                        <!-- Wrapper for slides -->
+                        <div id="carousel-inner" class="carousel-inner"></div>
 
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
 
-                    <div class=''>
+                </div>
 
-               <div id="caption" class=" well col-sm-5 col-md-6 col-lg-5 col-xl-5"></div>
-     
-           </div>
-    
+                <div class=''>
+
+                    <div id="caption" class=" well col-sm-5 col-md-6 col-lg-5 col-xl-5"></div>
+
+                </div>
+
+            </div>
         </div>
-   </div>      
-  </div>
+    </div>
 
 
 <script>
 
+$(function() {
 
-/*** Marker ***/
-
-
-
-/*** Draggable ***/
-  /*{ containment: "#containment-wrapper", scroll: false }*/ 
-
-/*$( function() {
-    $( "#typeInput" ).draggable({ scroll: false });
-  } );*/
-
-
-/*** Click outside collapse ***/
-
-$(document).click(function(e) {
-    if (!$(e.target).is('a')) {
-        $('.collapse').collapse('hide');        
-    }
-});
 
 
 var map = L.map('map', {
@@ -697,148 +253,31 @@ var markerCluster = L.markerClusterGroup({
   maxClusterRadius: 50
 
 });
+
 var group = L.layerGroup();
-var _filteredMarker = L.geoJSON();
-var photo_url ="https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/view?photos=03f467ac-5c96-4483-836b-4615e4ef8896"
-var thumbnailphoto = "https://fulcrumapp.s3.amazonaws.com/photos/thumb_73c7ab63-d930-40d0-8d95-3cb6f0da6bb4-71243998-1886-49ce-86e9-d1b0eb48f328.png?AWSAccessKeyId=AKIAINLD3OFR6WK7JO3Q&Signature=BrTEemOGspEKfYuTr56kQ4yvUf4%3D&Expires=1505566588" 
+var marker = L.geoJSON();
 
-
-
-function getSpectro() {
+function getGeoJSON() {
 $.when(
- $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(filterStories) {
+ $.getJSON('https://web.fulcrumapp.com/shares/3a4bbd0435c58166.geojson')).done(function(theGeoJSON) {
 
   (function removeNull(o) {
         for(var key in o) {
             if( null === o[key] ) o[key] = '';
             if ( typeof o[key] === 'object' ) removeNull(o[key]);
         }
-     })(filterStories);
+     })(theGeoJSON);
 
-  function get_random_color() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-     color += letters[Math.round(Math.random() * 15.66)];
-    }
-    return color;
-   };
-
-   _setColor = {
-    radius: 8,
-    fillColor: get_random_color(),
-    color: '#ffffff',
-    weight: 1,
-    opacity: 0.6,
-    fillOpacity: 0.8
-
-  }
-
-    _marker = filterStories.features;
+markers = theGeoJSON.features;
 
 
-////FILTER FOR THE AUTHORIZED CONTENT BY NATAHCA 
-           // _status =filterStories.features.properties.status
-          //    console.log(_status)
-         //   var test = for (i = 0; i<feature.properties.status;i++)
-/////////////////////////////////////////////////////////////////////
+/////  L.Geojson //////
+marker = new L.geoJSON(markers, {
 
-
-
-///////////////////////POP UP ////////////////////////////////////////////
-photosPreURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/"
-
-var first =""
-
-var urllen = 70
-var photoslen = 36
-      function photoURL(j){
-        for(var i = 0; i < _marker.length; i++) {
-        var urllen = 70
-        var photoslen = 39
-
-         obj = _marker[i].properties.photos_url.substring(70,106)
-         first =  _marker[i].properties.photos_url.substring(urllen,urllen+photoslen).replace('%2C','')
-         sec =  _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*2).replace('%2C','')
-         third = _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*3).replace('%2C','')
-         fourth = _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*4).replace('%2C','')
-         fifth =  _marker[i].properties.photos_url.substring(urllen+photoslen,urllen+photoslen*5).replace('%2C','')
-
-    return (photosPreURL+j)
-    
-    }}
-
-     
-
-
-      var image = new Image();
-      image.src = photoURL(first)
-      var image2 = new Image();
-      image2 .src = photoURL(sec)
-      var image3 = new Image();
-      image3.src = photoURL(third)
-      var image4 = new Image();
-      image4 .src = photoURL(fourth)
-      var image5 = new Image();
-      image5 .src = photoURL(fifth)
-
-      map.on('popupopen', function () {
-            // Get the modal
-      var modal = document.getElementById('myModal');
-
-      // Get the image and insert it inside the modal - use its "alt" text as a caption
-
-      var h2 = document.getElementById('titrePopUp');
-      var img = document.getElementById('myImg');
-      var modalImg = document.getElementById("img01");
-      var modalImg2 = document.getElementById("img02");
-      var modalImg3 = document.getElementById("img03");
-      var modalImg4 = document.getElementById("img04");
-      var modalImg5 = document.getElementById("img05");
-      var captionText = document.getElementById("caption");
-
-          img.onclick = openModal
-          h2.onclick = openModal
-
-           function openModal(){
-            map.closePopup();
-            modal.style.display = "block";
-
-            modalImg.src = image.src;
-            modalImg2.src = image2.src;
-            modalImg3.src = image3.src;
-            modalImg4.src = image4.src;
-            modalImg5.src = image5.src;
-            captionText.innerHTML = img.alt
-
-
-              // Get the <span> element that closes the modal
-              var span = document.getElementsByClassName("close")[0];
-
-              // When the user clicks on <span> (x), close the modal
-              span.onclick = function() { 
-                  modal.style.display = "none";
-              }
-
-
-              $('modalImg').on('click', function() {
-                $('.modal').hide();
-                  });
-
-          };
  
-
-    });
-
-/////////////////////////////////////////////////////////////////////////////
-
-    _filteredMarker = new L.geoJSON(_marker, {
-
-
-  
    pointToLayer: function(feature, latlng) {
 
-     var redMarker = new L.ExtraMarkers.icon(
+     var customMarker = new L.ExtraMarkers.icon(
      {
           icon: 'glyphicon-eye-open',
           markerColor: 'cyan',
@@ -846,16 +285,79 @@ var photoslen = 36
           prefix: 'glyphicon'
         });
 
-        return L.marker(latlng, {icon:redMarker})       
+        return L.marker(latlng, {icon:customMarker})       
       },
 
 
-    onEachFeature: function(feature, layer) {
+  onEachFeature: function(feature, layer) {
+
+var baseURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/"
+var div1 = '<div class="item active"><img src="'+baseURL+feature.properties.photos_url.substring(70,106)+'" id="img01" ></div>'
+var div2 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(109,145)+'" id="img02" ></div>'
+var div3 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(148,184)+'" id="img03" ></div>'
+var div4 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(187,223)+'" id="img04" ></div>'
+var div5 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(226,262)+'" id="img05" ></div>'
+
+
+function photoCount(){
+        
+    if (feature.properties.photos_url.length === 262) {
+    return div1+div2+div3+div4+div5
+    //return console.log("J'ai 5 photos")
+    }
+
+    else if (feature.properties.photos_url.length === 223) {
+   // return console.log("J'ai 4 photos")
+    return div1+div2+div3+div4
+    }
+
+    else if (feature.properties.photos_url.length === 184) {
+    //return console.log("J'ai 3 photos")
+     return div1+div2+div3
+    }
+
+    else if (feature.properties.photos_url.length === 145) {
+     //return console.log("J'ai 2 photos")
+     return div1+div2
+    }
+
+    else if (feature.properties.photos_url.length === 106) {
+    //return console.log("J'ai 1 photos")
+    return div1
+    }};
+
+photoCount()
+
+
+    
+// Capture le pop up //
+map.on('popupopen', function () {
+                 
+      var h2 = document.getElementById('titrePopUp');
+      var img = document.getElementById('myImg');
+      var modal = document.getElementById('myModal');
+      var captionText = document.getElementById("caption");
+      var carouselDiv = document.getElementById("carousel-inner")
+
+    // Fonction pour creer le contenu du modal //
+          img.onclick = function(){ 
+           map.closePopup();
+           modal.style.display = "block";
+           captionText.innerHTML = img.alt
+           carouselDiv.innerHTML = photoCount()
+
+
+    // Fonction pour fermer le modal //
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function() { 
+      modal.style.display = "none";
+      }
+    }
+});
+
+///////// START Bind tout le data dans le pop up /////////
+
      layer.bindPopup(
-
-
-      
-
      '<div id="popUpOpen"><a href="#" id="titrePopUp"><h2>'
 
      // Pop Up Content
@@ -901,12 +403,10 @@ var photoslen = 36
                  // End of alt attribution
                  // Caroussel
          +'" src="'
+         //+photosPreURL+first
          +feature.properties.photos_url.substring(0,106).replace('view?photos=','') 
          +'"></div></img>'   
         
-
-
-
     // Socials // 
 
       //Facbook
@@ -921,54 +421,35 @@ var photoslen = 36
        '&amp;count=horizontal"   style="width:110px; height:20px;"></iframe>')
 
     
-    }
-
+    } ///////// END Bind tout le data dans le pop up /////////
 
 
 
 });  //end _filtermarker
 
-
-//console.log(audioURL)
 //return _filteredMarker.addTo(map)
-markerCluster.addLayer(_filteredMarker)
-group.addLayer(_filteredMarker)
+markerCluster.addLayer(marker)
+group.addLayer(marker)
 map.addLayer(markerCluster)  
-//map.fitBounds(_filteredMarker.getBounds())
+map.fitBounds(marker.getBounds())
 
    });
 }
 
+// Click outside the header info div collapse //
 
-//console.log(_filteredMarker.feature)
-
-
-
-
-
-getSpectro()
-
+$(document).click(function(e) {
+    if (!$(e.target).is('a')) {
+        $('.collapse').collapse('hide');        
+    }
+});
 
 
+getGeoJSON()
 
- 
-
-
-
-
+})
   </script>  
-
- 
- 
-  
 </head>
-
-
- 
-
 </body>
 </html>
 
-
-   </body>
-</html>
