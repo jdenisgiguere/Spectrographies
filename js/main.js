@@ -1,8 +1,8 @@
 $(function() {
 
-var mapZentoken = L.Mapzen.apiKey = 'mapzen-3CAQoBZ'
+//var mapZentoken = L.Mapzen.apiKey = 'mapzen-3CAQoBZ'
 
-
+/*
 var map = L.Mapzen.map('map', {
   center: [45.5237019,-73.6197287],
   zoom: 15,
@@ -14,11 +14,11 @@ var map = L.Mapzen.map('map', {
         'https://mapzen.com/carto/refill-style/8/refill-style.zip',
         'https://mapzen.com/carto/refill-style/8/themes/color-pink.zip'
       ] } }
-});
+});*/
 
-/*var map = L.map('map', {
+var map = L.map('map', {
           zoomControl: true}).setView([45.5314, -73.6750], 9);
-*/
+
 
 
 var mapBoxWhite = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
@@ -30,7 +30,7 @@ var stamenToner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-ba
   minZoom: 0,
   maxZoom: 18,
   ext: 'png'
-})
+}).addTo(map)
 
 
 
@@ -39,8 +39,8 @@ function toggleLayer() {
   'mapBoxWhite ': mapBoxWhite,
   'mapBoxDark  ': mapBoxDark,
   'mapBoxCyber ': mapBoxCyber,
-  'stamenToner ': stamenToner,
-  'mapZenPink  ': map
+  'stamenToner ': stamenToner
+  
  };
 
  L.control.layers(baseMaps).addTo(map);
@@ -240,6 +240,8 @@ var pseudoData = []
 var typeData = []
 var genreData = []
 var titreData = []
+var typeAutreData =[]
+var genreAutreData = []
 
 
 
@@ -249,13 +251,51 @@ marker.eachLayer(function(layer) {
   typeData.push(layer.feature.properties.type.split(','))
   genreData.push(layer.feature.properties.genre.split(',')) 
   titreData.push(layer.feature.properties.titre)
+  typeAutreData.push(layer.feature.properties.type_other.split(','))
+  genreAutreData.push(layer.feature.properties.genre_other.split(','))
 });
 
 
+//////Merging the Two Dimentional Arrays///////////
 var genreMerged = [].concat.apply([], genreData);
 var typeMerged = [].concat.apply([], typeData);
+var typeAD = [].concat.apply([], genreAutreData);
+var genreAD = [].concat.apply([], typeAutreData);
 
-//console.log(genreMerged)
+/////////////////////////////////////////////////
+
+////Function that delete empty values////
+temp = [];
+
+for(let i of genreAD)
+    i && temp.push(i); // copy each non-empty value to the 'temp' array
+
+genreAD = temp;
+delete temp
+
+////////////////////////////////////////
+
+////Function that delete empty values////
+temp = [];
+
+for(let i of typeAD)
+    i && temp.push(i); // copy each non-empty value to the 'temp' array
+
+typeAD = temp;
+delete temp
+
+////////////////////////////////////////
+
+
+/////////Function that merge others//////////
+
+genreMerged.push.apply(genreMerged, genreAD)
+typeMerged.push.apply(typeMerged, typeAD)
+
+
+//////////////////////////////////////////
+
+
 
 Array.prototype.unique = function() {
   return this.filter(function (value, index, self) { 
@@ -263,40 +303,39 @@ Array.prototype.unique = function() {
   });
 }
 
-//console.log(genreMerged.unique())
-
-
-/*console.log(pseudoData)
-console.log(typeData)
-console.log(genreData)
-console.log(titreData)*/
-
 ///creation de la searchbox//
 
 
 
  function pBox() {
   $('#participantBox').select2(
-   {data: pseudoData
+   {data: pseudoData,
+    allowClear:true,
+    placeholder:'Chercher un participant'
           })
  } pBox()
 
 function tBox() {
   $('#typeBox').select2(
-   {data: typeMerged.unique()
+   {data: typeMerged.unique(),
+    allowClear:true
      })
  } tBox()
 
  function gBox() {
   $('#genreBox').select2(
-   {data: genreMerged.unique()
+   {data: genreMerged.unique(),
+    allowClear:true
+
      })
  }gBox()
 
  function titBox() {
   $('#titreBox').select2(
    {
-     data: titreData
+     data: titreData,
+     allowClear:true,
+     placeholder:'Chercher un titre'
      })
  }titBox()
 
@@ -346,10 +385,10 @@ pointToLayer: function(feature, latlng) {
 
 
 filter: function(feature, layer) {
-  if (feature.properties.pseudo == value){return true}
-  else if (feature.properties.type == value){ return true}
-  else if (feature.properties.genre == value){ return true}
-  else if (feature.properties.titre == value){ return true}
+  if (feature.properties.pseudo == value){return feature.properties.pseudo = value}
+  else if (feature.properties.type == value){ return feature.properties.type = value}
+  else if (feature.properties.genre == value){ return properties.genre = value }
+  else if (feature.properties.titre == value){ return feature.properties.titre = value}
       }
   })
 
@@ -382,6 +421,14 @@ getFilterGeoJSON(value)
 
 });
 
+$("#participantBox").on("select2:unselect", function(e) {
+
+ map.removeLayer(filteredMarker)
+ map.addLayer(marker)
+ map.flyToBounds(marker.getBounds())
+
+});
+
 $("#typeBox").on("select2:select", function(e) {
 
  value = $(e.currentTarget).val();
@@ -389,6 +436,15 @@ $("#typeBox").on("select2:select", function(e) {
 getFilterGeoJSON(value)
 
 });
+
+$("#typeBox").on("select2:unselect", function(e) {
+
+map.removeLayer(filteredMarker)
+ map.addLayer(marker)
+ map.flyToBounds(marker.getBounds())
+
+});
+
 
 $("#genreBox").on("select2:select", function(e) {
 
@@ -398,11 +454,29 @@ getFilterGeoJSON(value)
 
 });
 
+$("#genreBox").on("select2:unselect", function(e) {
+
+ value = $(e.currentTarget).val();
+ 
+ map.removeLayer(filteredMarker)
+ map.addLayer(marker)
+ map.flyToBounds(marker.getBounds())
+
+});
+
 $("#titreBox").on("select2:select", function(e) {
 
  value = $(e.currentTarget).val();
  
 getFilterGeoJSON(value)
+
+});
+
+$("#titreBox").on("select2:unselect", function(e) {
+
+ map.removeLayer(filteredMarker)
+ map.addLayer(marker)
+ map.flyToBounds(marker.getBounds())
 
 });
 

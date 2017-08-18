@@ -10,50 +10,18 @@
   
   SLIDER
   
-  Finir la fonction 
-  
-  
-   onEachFeature: function(feature, layer) {
+Filtrer seulement avec le layer
+clearfilter la croix dans 
+griser les autres quand j ai fais un choix
+Filtre sur le mot lui meme
+multi 
 
-		var baseURL = "https://web.fulcrumapp.com/shares/3a4bbd0435c58166/photos/"
-		var div1 = '<div class="item active"><img src="'+baseURL+feature.properties.photos_url.substring(70,106)+'" id="img01" ></div>'
-		var div2 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(109,145)+'" id="img02" ></div>'
-		var div3 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(148,184)+'" id="img03" ></div>'
-		var div4 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(187,223)+'" id="img04" ></div>'
-		var div5 = '<div class="item "><img src="'+baseURL+feature.properties.photos_url.substring(226,262)+'" id="img05" ></div>'
+button reset all
+
+pop up dans le marker du filtre
+
+mapzen JS
+https://mapzen.com/documentation/mapzen-js/get-started/
 
 
-	function comptePhoto(){
-			
-		if (feature.properties.photos_url.length === 262) {
-		return div1+div2+div3+div4+div5
-		//return console.log("J'ai 5 photos")
-		}
-
-		else if (feature.properties.photos_url.length === 223) {
-	   // return console.log("J'ai 4 photos")
-		return div1+div2+div3+div4
-		}
-
-		else if (feature.properties.photos_url.length === 184) {
-		//return console.log("J'ai 3 photos")
-		 return div1+div2+div3
-		}
-
-		else if (feature.properties.photos_url.length === 145) {
-		 //return console.log("J'ai 2 photos")
-		 return div1+div2
-		}
-
-		else if (feature.properties.photos_url.length === 106) {
-		//return console.log("J'ai 1 photos")
-		return div1
-		}};
-
-	comptePhoto()
-	
-	var carouselDiv = document.getElementById("carousel-inner")
-	
-	img.onclick = function(){ carouselDiv.innerHTML = comptePhoto() }
-	
-	!!!!!! retourne toujours les memes photos (premier de la liste) !!!!!!
+ajouter le pop up sur les selected
