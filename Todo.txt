@@ -25,3 +25,5 @@ https://mapzen.com/documentation/mapzen-js/get-started/
 
 
 ajouter le pop up sur les selected
+
+Bug sur le select unique mais feature multiple : ex il existe de marker de type "Histoire" Return Uncaught TypeError: Cannot read property 'lat' of undefined
