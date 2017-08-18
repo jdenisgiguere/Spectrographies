@@ -1,23 +1,52 @@
 $(function() {
 
+var mapZentoken = L.Mapzen.apiKey = 'mapzen-3CAQoBZ'
 
 
-var map = L.map('map', {
+var map = L.Mapzen.map('map', {
+  center: [45.5237019,-73.6197287],
+  zoom: 15,
+  minZoom:10,
+  maxZoom: 18,
+  tangramOptions: {
+    scene: {
+      import: [
+        'https://mapzen.com/carto/refill-style/8/refill-style.zip',
+        'https://mapzen.com/carto/refill-style/8/themes/color-pink.zip'
+      ] } }
+});
+
+/*var map = L.map('map', {
           zoomControl: true}).setView([45.5314, -73.6750], 9);
+*/
 
 
-
-var mapbox1 = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
-
-var mapbox2 =  L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66v7isf7jji2soaolfu28sy/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg').addTo(map)
-
-var baseLayer2 = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.{ext}', {
+var mapBoxWhite = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66rikp37hgc2rltvyo7eepa/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
+var mapBoxCyber = L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj6guz4ve3stv2rp4y9ftqbti/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
+var mapBoxDark =  L.tileLayer('https://api.mapbox.com/styles/v1/clementg123/cj66v7isf7jji2soaolfu28sy/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xlbWVudGcxMjMiLCJhIjoiY2o2M3ZhODh3MWxwNDJxbnJnaGZxcWNoMiJ9.YroDniTcealGFJgHtQ2hDg')
+var stamenToner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   subdomains: 'abcd',
   minZoom: 0,
   maxZoom: 18,
   ext: 'png'
 })
+
+
+
+function toggleLayer() {
+ var baseMaps = {
+  'mapBoxWhite ': mapBoxWhite,
+  'mapBoxDark  ': mapBoxDark,
+  'mapBoxCyber ': mapBoxCyber,
+  'stamenToner ': stamenToner,
+  'mapZenPink  ': map
+ };
+
+ L.control.layers(baseMaps).addTo(map);
+}
+toggleLayer();
+
 
 var markerCluster = L.markerClusterGroup({
   spiderfyOnMaxZoom: true,
@@ -212,42 +241,62 @@ var typeData = []
 var genreData = []
 var titreData = []
 
+
+
 marker.eachLayer(function(layer) {
   
   pseudoData.push(layer.feature.properties.pseudo)
-  typeData.push(layer.feature.properties.type)
-  genreData.push(layer.feature.properties.genre)
+  typeData.push(layer.feature.properties.type.split(','))
+  genreData.push(layer.feature.properties.genre.split(',')) 
   titreData.push(layer.feature.properties.titre)
 });
 
-console.log(pseudoData)
+
+var genreMerged = [].concat.apply([], genreData);
+var typeMerged = [].concat.apply([], typeData);
+
+//console.log(genreMerged)
+
+Array.prototype.unique = function() {
+  return this.filter(function (value, index, self) { 
+    return self.indexOf(value) === index;
+  });
+}
+
+//console.log(genreMerged.unique())
+
+
+/*console.log(pseudoData)
 console.log(typeData)
 console.log(genreData)
-console.log(titreData)
+console.log(titreData)*/
 
 ///creation de la searchbox//
+
+
 
  function pBox() {
   $('#participantBox').select2(
    {data: pseudoData
-     })
+          })
  } pBox()
 
 function tBox() {
   $('#typeBox').select2(
-   {data: typeData
+   {data: typeMerged.unique()
      })
  } tBox()
 
  function gBox() {
   $('#genreBox').select2(
-   {data: genreData
+   {data: genreMerged.unique()
      })
  }gBox()
 
  function titBox() {
   $('#titreBox').select2(
-   {data: titreData
+   {
+     data: titreData
      })
  }titBox()
 
@@ -256,7 +305,7 @@ function tBox() {
 markerCluster.addLayer(marker)
 group.addLayer(marker)
 map.addLayer(markerCluster)  
-map.fitBounds(marker.getBounds())
+//map.fitBounds(marker.getBounds())
 
 
    });
@@ -297,11 +346,10 @@ pointToLayer: function(feature, latlng) {
 
 
 filter: function(feature, layer) {
-  if (feature.properties.pseudo === value)
-    {return true}
-  else if (feature.properties.type === value){ return true}
-  else if (feature.properties.genre === value){ return true}
-  else if (feature.properties.titre === value){ return true}
+  if (feature.properties.pseudo == value){return true}
+  else if (feature.properties.type == value){ return true}
+  else if (feature.properties.genre == value){ return true}
+  else if (feature.properties.titre == value){ return true}
       }
   })
 

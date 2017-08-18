@@ -19,12 +19,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
     <link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
+     <!-- style sheet for mapzen.js -->
+        <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
+
     <link rel="stylesheet" href="css/style.css">
 
-
-
+       
+      
        
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+      <!-- latest version of mapzen.js-->
+        <script src="https://mapzen.com/js/mapzen.js"></script>
+
+        <!-- latest minified version of mapzen.js -->
+        <script src="https://mapzen.com/js/mapzen.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
@@ -58,7 +67,8 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Participant</label>
-                             <select id="participantBox" class="form-control select2-multiple">
+                            <select id="participantBox" class="form-control">
+                             
                                     <option></option>
                             </select>
                         </div>
@@ -67,7 +77,7 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Type</label>
-                            <select id="typeBox" class="form-control select2-single">
+                            <select id="typeBox" class="form-control js-example-basic-multiple" multiple="multiple">
                                 <option></option>
                             </select>
                         </div>
@@ -77,7 +87,7 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Genre</label>
-                            <select id="genreBox" class="form-control select2-single">
+                            <select id="genreBox" class="form-control multiple="multiple"">
                                   <option></option>
                             </select>
                         </div>
@@ -86,7 +96,7 @@
                     <div class="well formContainer">
                         <div class="form-group">
                             <label for="single" class="control-label">Titre</label>
-                            <select id="titreBox" class="form-control select2-single">
+                            <select id="titreBox" class="form-control multiple="multiple"">
                                   <option></option>
                             </select>
                         </div>
